@@ -1,10 +1,8 @@
-name: Deploy Seance 3 to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches: [main]
-    paths:
-      - 'seance3-types-tests/**'
   workflow_dispatch:
 
 permissions:
@@ -32,17 +30,23 @@ jobs:
           cache: pnpm
           cache-dependency-path: seance3-types-tests/pnpm-lock.yaml
 
-      - name: Install dependencies
+      - name: Install dependencies (seance3)
         working-directory: seance3-types-tests
         run: pnpm install
 
-      - name: Build slides
+      - name: Build seance3 slides
         working-directory: seance3-types-tests
-        run: pnpm build --base /Tests-Validation/
+        run: pnpm build --base /Tests-Validation/seance3/
+
+      - name: Assemble site
+        run: |
+          mkdir -p dist/seance3
+          cp landing/index.html dist/index.html
+          cp -r seance3-types-tests/dist/. dist/seance3/
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: seance3-types-tests/dist
+          path: dist
 
   deploy:
     needs: build

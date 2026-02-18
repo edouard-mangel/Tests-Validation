@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tests & Validation — CNAM</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 3rem 1.5rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #38bdf8, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      color: #94a3b8;
+      font-size: 1.1rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 960px;
+    }
+
+    .card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s, transform 0.2s;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .card:hover {
+      border-color: #38bdf8;
+      transform: translateY(-2px);
+    }
+
+    .card.disabled {
+      opacity: 0.4;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      background: #0ea5e9;
+      color: white;
+      white-space: nowrap;
+    }
+
+    .badge.soon {
+      background: #475569;
+    }
+
+    .card h2 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #f1f5f9;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: #94a3b8;
+      line-height: 1.5;
+    }
+
+    .card-footer {
+      margin-top: auto;
+      font-size: 0.8rem;
+      color: #38bdf8;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .card.disabled .card-footer {
+      color: #475569;
+    }
+
+    footer {
+      margin-top: 4rem;
+      color: #475569;
+      font-size: 0.85rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Tests &amp; Validation</h1>
+    <p>Module CNAM — Slides de cours</p>
+  </header>
+
+  <div class="grid">
+
+    <a href="./seance3/" class="card">
+      <div class="card-header">
+        <span class="badge">Séance 3</span>
+      </div>
+      <h2>Les types de tests utiles au développeur</h2>
+      <p>Tests e2e, d'intégration et unitaires — la pyramide des tests et les deux écoles de TU.</p>
+      <div class="card-footer">
+        Voir les slides →
+      </div>
+    </a>
+
+    <div class="card disabled">
+      <div class="card-header">
+        <span class="badge soon">Séance 4</span>
+      </div>
+      <h2>À venir</h2>
+      <p>Prochaine séance du module.</p>
+      <div class="card-footer">
+        Bientôt disponible
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    Tests &amp; Validation — CNAM
+  </footer>
+
+</body>
+</html>
