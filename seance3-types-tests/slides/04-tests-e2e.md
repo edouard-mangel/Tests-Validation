@@ -10,23 +10,31 @@ C'est ça un test e2e : on teste la chaîne complète.
 
 ---
 
+---
+layout: two-cols-header
+---
+
 # Tests End-to-End (e2e)
 
-Au plus près du contexte de l'utilisateur.
+Au plus près du contexte de l'utilisateur. Vérifient l'**ensemble des sous-systèmes** impliqués dans un cas d'usage.
 
-Vérifient l'**ensemble des sous-systèmes** impliqués dans un cas d'usage.
-
-<br>
-
-<v-clicks>
+::left::
 
 ### ✅ Avantages
+
+<v-clicks>
 
 - Testent l'application **comme un vrai utilisateur**
 - Vérifient que tous les composants fonctionnent ensemble
 - Outils indépendants de la technologie (Selenium, Cypress, Playwright...)
 
+</v-clicks>
+
+::right::
+
 ### ❌ Inconvénients
+
+<v-clicks>
 
 - **Très lents** à l'exécution (~30 min pour 150 tests)
 - **Chers** à développer ET à maintenir

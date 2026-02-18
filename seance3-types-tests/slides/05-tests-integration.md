@@ -11,23 +11,31 @@ On ne teste pas toute la chaîne, juste UNE connexion à la fois.
 
 ---
 
+---
+layout: two-cols-header
+---
+
 # Tests d'intégration
 
-Vérifient la **communication avec un sous-système extérieur** (BDD, API, système de mails...).
+Vérifient la **communication avec un sous-système extérieur** (BDD, API, système de mails...). On ne teste qu'**une connexion à la fois**.
 
-Environnement limité : on ne teste qu'**une connexion à la fois**.
-
-<br>
-
-<v-clicks>
+::left::
 
 ### ✅ Avantages
 
-- Permettent de vérifier indépendamment chaque sous-système extérieur
+<v-clicks>
+
+- Vérifient indépendamment chaque sous-système extérieur
 - Environnement limité et contrôlé
 - Outils souvent les mêmes que les tests unitaires (en .NET : xUnit)
 
+</v-clicks>
+
+::right::
+
 ### ❌ Inconvénients
+
+<v-clicks>
 
 - Tests techniques, **peu de valeur métier**
 - Spécifiques à chaque sous-système : changer le sous-système les rend obsolètes

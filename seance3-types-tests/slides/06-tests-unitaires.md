@@ -240,17 +240,6 @@ C'est lisible par un non-développeur, ça documente le besoin métier.
 -->
 
 ---
-layout: image
-image: /images/tests-unitaires-avantages.png
----
-
-<!--
-Image humoristique : "Un coup de main ?" / "Non merci, pas le temps" / "Nous sommes trop occupés"
-C'est exactement l'argument classique contre les tests : "on n'a pas le temps".
-Mais sans tests, on passe encore plus de temps à corriger des bugs...
--->
-
----
 
 # Tests unitaires — Résumé
 
@@ -290,6 +279,17 @@ Mais sans tests, on passe encore plus de temps à corriger des bugs...
 Rassurer les étudiants : c'est normal que ce soit difficile au début.
 L'objectif du TP qui suit est justement de commencer à pratiquer.
 La difficulté n'est pas dans la syntaxe (xUnit est simple), mais dans le choix de QUOI tester.
+-->
+
+---
+layout: image
+image: /images/tests-unitaires-avantages.png
+---
+
+<!--
+Image humoristique : "Un coup de main ?" / "Non merci, pas le temps" / "Nous sommes trop occupés"
+C'est exactement l'argument classique contre les tests : "on n'a pas le temps".
+Mais sans tests, on passe encore plus de temps à corriger des bugs...
 -->
 
 ---
