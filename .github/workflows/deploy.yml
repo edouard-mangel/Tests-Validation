@@ -28,7 +28,6 @@ jobs:
         with:
           node-version: 20
           cache: pnpm
-          cache-dependency-path: seance3-types-tests/pnpm-lock.yaml
 
       - name: Install dependencies (seance3)
         working-directory: seance3-types-tests
@@ -38,11 +37,21 @@ jobs:
         working-directory: seance3-types-tests
         run: pnpm build --base /Tests-Validation/seance3/
 
+      - name: Install dependencies (seance4)
+        working-directory: seance4-tdd-bonnes-pratiques
+        run: pnpm install
+
+      - name: Build seance4 slides
+        working-directory: seance4-tdd-bonnes-pratiques
+        run: pnpm build --base /Tests-Validation/seance4/
+
       - name: Assemble site
         run: |
           mkdir -p dist/seance3
+          mkdir -p dist/seance4
           cp landing/index.html dist/index.html
           cp -r seance3-types-tests/dist/. dist/seance3/
+          cp -r seance4-tdd-bonnes-pratiques/dist/. dist/seance4/
 
       - uses: actions/upload-pages-artifact@v3
         with:
