@@ -1,0 +1,56 @@
+name: Deploy Seance 3 to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'seance3-types-tests/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+          cache-dependency-path: seance3-types-tests/pnpm-lock.yaml
+
+      - name: Install dependencies
+        working-directory: seance3-types-tests
+        run: pnpm install
+
+      - name: Build slides
+        working-directory: seance3-types-tests
+        run: pnpm build --base /Tests-Validation/
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: seance3-types-tests/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
