@@ -20,11 +20,15 @@ build:
     - cd ../seance4-types-tests
     - pnpm install
     - pnpm build --base /$CI_PROJECT_NAME/seance4/
+    - cd ../seance5-doublures-et-ia
+    - pnpm install
+    - pnpm build --base /$CI_PROJECT_NAME/seance5/
     - cd ..
-    - mkdir -p public/seance3 public/seance4
+    - mkdir -p public/seance3 public/seance4 public/seance5
     - cp landing/index.html public/
     - cp -r seance3-tdd-bonnes-pratiques/dist/. public/seance3/
     - cp -r seance4-types-tests/dist/. public/seance4/
+    - cp -r seance5-doublures-et-ia/dist/. public/seance5/
   artifacts:
     paths:
       - public

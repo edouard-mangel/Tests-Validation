@@ -45,13 +45,23 @@ jobs:
         working-directory: seance4-types-tests
         run: pnpm build --base /Tests-Validation/seance4/
 
+      - name: Install dependencies (seance5)
+        working-directory: seance5-doublures-et-ia
+        run: pnpm install
+
+      - name: Build seance5 slides
+        working-directory: seance5-doublures-et-ia
+        run: pnpm build --base /Tests-Validation/seance5/
+
       - name: Assemble site
         run: |
           mkdir -p dist/seance3
           mkdir -p dist/seance4
+          mkdir -p dist/seance5
           cp landing/index.html dist/index.html
           cp -r seance3-tdd-bonnes-pratiques/dist/. dist/seance3/
           cp -r seance4-types-tests/dist/. dist/seance4/
+          cp -r seance5-doublures-et-ia/dist/. dist/seance5/
 
       - uses: actions/upload-pages-artifact@v3
         with:
