@@ -29,29 +29,49 @@ jobs:
           node-version: 20
           cache: pnpm
 
+      - name: Install dependencies (seance2)
+        working-directory: seance2-tdd
+        run: pnpm install
+
+      - name: Build seance2 slides
+        working-directory: seance2-tdd
+        run: pnpm build --base /Tests-Validation/seance2/
+
       - name: Install dependencies (seance3)
-        working-directory: seance3-tdd-bonnes-pratiques
+        working-directory: seance3-test-doubles
         run: pnpm install
 
       - name: Build seance3 slides
-        working-directory: seance3-tdd-bonnes-pratiques
+        working-directory: seance3-test-doubles
         run: pnpm build --base /Tests-Validation/seance3/
 
       - name: Install dependencies (seance4)
-        working-directory: seance4-types-tests
+        working-directory: seance4-integration
         run: pnpm install
 
       - name: Build seance4 slides
-        working-directory: seance4-types-tests
+        working-directory: seance4-integration
         run: pnpm build --base /Tests-Validation/seance4/
+
+      - name: Install dependencies (seance5)
+        working-directory: seance5-couverture-qualite
+        run: pnpm install
+
+      - name: Build seance5 slides
+        working-directory: seance5-couverture-qualite
+        run: pnpm build --base /Tests-Validation/seance5/
 
       - name: Assemble site
         run: |
+          mkdir -p dist/seance2
           mkdir -p dist/seance3
           mkdir -p dist/seance4
+          mkdir -p dist/seance5
           cp landing/index.html dist/index.html
-          cp -r seance3-tdd-bonnes-pratiques/dist/. dist/seance3/
-          cp -r seance4-types-tests/dist/. dist/seance4/
+          cp -r seance2-tdd/dist/. dist/seance2/
+          cp -r seance3-test-doubles/dist/. dist/seance3/
+          cp -r seance4-integration/dist/. dist/seance4/
+          cp -r seance5-couverture-qualite/dist/. dist/seance5/
 
       - uses: actions/upload-pages-artifact@v3
         with:
