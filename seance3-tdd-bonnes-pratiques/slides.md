@@ -1,6 +1,6 @@
 ---
 theme: seriph
-title: "Tests & Validation - Séance 4"
+title: "Tests & Validation - Séance 3"
 info: |
   ## Quand et comment écrire ses tests ?
   Module Tests & Validation - CNAM
@@ -16,7 +16,7 @@ duration: 90min
 
 # Tests & Validation
 
-## Séance 4 — Quand et comment écrire ses tests ?
+## Séance 3 — Quand et comment écrire ses tests ?
 
 <br>
 
@@ -43,8 +43,8 @@ Durée prévue : 1h30 de cours + 1h30 de TP
 </v-clicks>
 
 <!--
-On reprend là où on s'est arrêtés : on sait maintenant QUELS types de tests existent.
-La question d'aujourd'hui est QUAND et COMMENT les écrire.
+On capitalise sur le TP2 : vous avez écrit vos premiers tests unitaires.
+La question d'aujourd'hui est QUAND et COMMENT les écrire efficacement.
 On va de l'approche la plus naïve (Test After) à la plus disciplinée (TDD).
 -->
 

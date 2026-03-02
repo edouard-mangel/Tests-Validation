@@ -1,6 +1,6 @@
 ---
 theme: seriph
-title: "Tests & Validation - Séance 3"
+title: "Tests & Validation - Séance 4"
 info: |
   ## Les types de tests utiles au développeur
   Module Tests & Validation - CNAM
@@ -16,7 +16,7 @@ duration: 90min
 
 # Tests & Validation
 
-## Séance 3 — Les types de tests utiles au développeur
+## Séance 4 — Les types de tests utiles au développeur
 
 <br>
 
@@ -24,6 +24,8 @@ duration: 90min
 
 <!--
 Objectif de la séance : comprendre les différents niveaux de tests (e2e, intégration, unitaire), savoir quand utiliser chacun, et comprendre la différence entre tester l'implémentation et tester le comportement.
+
+Pré-requis : TP2 (tests unitaires) et Séance 3 (TDD, FIRST). On élargit maintenant la perspective au-delà des tests unitaires.
 
 Durée prévue : 1h30 de cours + 1h30 de TP
 -->
@@ -46,7 +48,7 @@ Durée prévue : 1h30 de cours + 1h30 de TP
 
 <!--
 Présenter le déroulé. On commence par le "pourquoi", puis on descend la pyramide du plus macro au plus micro.
-La séance se termine sur les tests unitaires, qui seront le sujet principal du TP.
+La séance se termine sur les tests unitaires — que vous maîtrisez déjà grâce au TP2 et à la séance sur le TDD.
 -->
 
 ---
