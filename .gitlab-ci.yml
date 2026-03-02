@@ -1,0 +1,42 @@
+image: node:20
+
+stages:
+  - build
+  - deploy
+
+variables:
+  PNPM_HOME: /root/.local/share/pnpm
+  PATH: /root/.local/share/pnpm:$PATH
+
+build:
+  stage: build
+  before_script:
+    - corepack enable
+    - corepack prepare pnpm@latest --activate
+  script:
+    - cd seance3-tdd-bonnes-pratiques
+    - pnpm install
+    - pnpm build --base /$CI_PROJECT_NAME/seance3/
+    - cd ../seance4-types-tests
+    - pnpm install
+    - pnpm build --base /$CI_PROJECT_NAME/seance4/
+    - cd ..
+    - mkdir -p public/seance3 public/seance4
+    - cp landing/index.html public/
+    - cp -r seance3-tdd-bonnes-pratiques/dist/. public/seance3/
+    - cp -r seance4-types-tests/dist/. public/seance4/
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+pages:
+  stage: deploy
+  script:
+    - echo "Deploying to GitLab Pages"
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
