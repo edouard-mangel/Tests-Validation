@@ -126,12 +126,19 @@ class: text-center
 
 **Exercice 2** — Tests d'API avec `WebApplicationFactory`
 
+**Exercice 3** — Property-Based Testing avec FsCheck
+
+**Exercice 4** — Contract Testing avec Pact
+
 <br>
 
 *Qu'est-ce que le test d'intégration a attrapé que le test unitaire n'aurait pas vu ?*
 
 <!--
-Le TP utilise une petite Web API ASP.NET fournie.
-Les étudiants écrivent des tests d'intégration pour le repository et pour les endpoints.
-Question de réflexion à la fin : comparer ce que chaque niveau de test a attrapé.
+Le TP utilise une petite Web API ASP.NET fournie (TodoApi).
+1. Tests de repository avec InMemory puis SQLite — comparer les comportements
+2. Tests d'API avec WebApplicationFactory — découvrir un bug de sérialisation
+3. Property-Based Testing avec FsCheck — propriétés roundtrip et invariant
+4. Contract Testing avec Pact — écrire un test consommateur (guidé car concept nouveau)
+Question de réflexion à la fin : tableau bug → niveau de test qui l'a détecté.
 -->

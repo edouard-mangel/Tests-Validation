@@ -210,6 +210,8 @@ class: text-center
 
 **Exercice 3** — Test Data Builders : simplifier le setup des tests
 
+**Exercice 4** — `IClassFixture` : partager le setup entre les tests
+
 <v-click>
 
 <br>
@@ -227,10 +229,9 @@ var user = new UserBuilder().AsPremium().WithEmail("alice@test.com").Build();
 *"Ai-je testé le comportement ou l'implémentation ?"*
 
 <!--
-Le TP comporte trois parties :
-1. Un NotificationService avec des dépendances déjà injectées — les étudiants écrivent les tests
+Le TP comporte quatre parties :
+1. Un NotificationService avec des dépendances déjà injectées — doublures manuelles puis NSubstitute
 2. Un code tightly coupled — les étudiants refactorent pour injecter les dépendances, puis testent
 3. Les étudiants refactorent le setup de leurs tests pour utiliser le pattern Builder
-   → UserBuilder avec des méthodes fluentes (AsPremium, WithEmail, WithOrders...)
-   → Objectif : réduire le bruit dans les tests et rendre le setup plus lisible
+4. Les étudiants extraient le setup partagé dans une IClassFixture
 -->

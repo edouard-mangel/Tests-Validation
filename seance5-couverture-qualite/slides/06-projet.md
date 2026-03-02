@@ -109,9 +109,11 @@ class: text-center
 
 **Exercice 1** — Identifier les test smells dans un codebase fourni
 
-**Exercice 2** — Réécrire les tests pour les rendre pertinents
+**Exercice 2** — Characterization Tests sur le code legacy
 
-**Exercice 3** — Lancer Stryker et comparer avant/après
+**Exercice 3** — Réécrire les tests pour les rendre pertinents
+
+**Exercice 4** — Lancer Stryker et comparer avant/après
 
 <br>
 
@@ -119,6 +121,10 @@ class: text-center
 
 <!--
 Le TP en deux temps :
-1. Exercices sur les anti-patterns et Stryker (1h30)
+1. Exercices sur la qualité des tests (1h30) :
+   - Identifier les smells dans une suite de tests fournie
+   - Écrire des characterization tests pour capturer le comportement legacy
+   - Réécrire les tests en corrigeant les smells
+   - Mesurer l'amélioration avec Stryker (mutation score avant/après)
 2. Formation des groupes, choix du sujet, et début de réflexion sur le domaine (30min)
 -->
