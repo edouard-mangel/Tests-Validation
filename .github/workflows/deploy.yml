@@ -28,6 +28,9 @@ jobs:
         with:
           node-version: 20
           cache: pnpm
+          cache-dependency-path: |
+            seance3-tdd-bonnes-pratiques/pnpm-lock.yaml
+            seance4-types-tests/pnpm-lock.yaml
 
       - name: Install dependencies (seance3)
         working-directory: seance3-tdd-bonnes-pratiques
