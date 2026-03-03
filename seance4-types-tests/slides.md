@@ -1,5 +1,5 @@
 ---
-theme: the-unnamed
+theme: ../theme
 title: "Tests & Validation - Séance 4"
 info: |
   ## Types de tests, intégration et stratégie
