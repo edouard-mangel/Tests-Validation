@@ -22,7 +22,7 @@ dotnet add TestingTP3.Tests package NSubstitute
 <div class="page" />
 
 
-## Exercice 1 - Tester NotificationService avec des doublures (50 min)
+## Exercice 1 - Tester NotificationService avec des doublures (55 min)
 
 ### Contexte
 
@@ -278,7 +278,7 @@ public void NotifyAllUsers_SendsEmailOnlyToActiveUsers()
 
 Remarquez comme le spy rend l'assertion naturelle : on inspecte les emails **reellement captures** et on verifie leur contenu.
 
-### Etape 5 - Le meme test avec NSubstitute : comparer (10 min)
+### Etape 5 - Le meme test avec NSubstitute : comparer les approches (15 min)
 
 Reecrivez maintenant **les memes tests** avec NSubstitute. Voici les operations cles :
 
@@ -290,18 +290,48 @@ Reecrivez maintenant **les memes tests** avec NSubstitute. Voici les operations 
 | Verifier l'absence d'appel | `emailSender.DidNotReceive().Send(...)` |
 | Accepter n'importe quel argument | `Arg.Any<string>()` |
 
-Reecrivez ces deux tests avec NSubstitute :
+Creez une nouvelle classe `NotificationServiceNSubTests` et reecrivez ces deux tests avec NSubstitute :
 
 1. `NotifyUser_ExistingUser_SendsEmail` — verifiez avec `.Received(1).Send(...)` au lieu du spy
 2. `NotifyAllUsers_SendsEmailOnlyToActiveUsers` — configurez `GetAll().Returns(...)`, puis verifiez avec `.Received()` et `.DidNotReceive()` pour chaque utilisateur
 
-Comparez les deux versions et repondez a ces questions :
+Les deux versions (spy et NSubstitute) doivent etre au vert avant de continuer.
 
-- **Lisibilite** : quel test exprime le mieux *ce qui se passe* ?
-- **Couplage** : le test NSubstitute verifie-t-il le **resultat** (quel email a ete envoye) ou l'**implementation** (comment le service a appele sa dependance) ?
-- **Fragilite** : imaginez qu'on refactore `NotifyUser` pour formater le sujet differemment (ex: `"[15/06/2025] Notification"` au lieu de `"Notification du 15/06/2025"`). Quel test casse ? Quel test survit ?
+#### 5a - Refactoring : changer le format du sujet
 
-> Le spy capture des **donnees** qu'on peut inspecter librement. `.Received()` verifie des **appels exacts** — c'est du couplage a l'implementation deguise en test.
+Un collegue modifie le format du sujet des emails. Dans `NotificationService.NotifyUser`, changez :
+
+```csharp
+// Avant
+$"Notification du {_clock.Now:dd/MM/yyyy}"
+
+// Apres
+$"[{_clock.Now:dd/MM/yyyy}] Notification"
+```
+
+Lancez **tous** les tests. Constatez :
+
+- Quels tests de la version **spy** cassent ? Pourquoi ?
+- Quels tests de la version **NSubstitute** cassent ? Pourquoi ?
+
+Le spy capture des **donnees** qu'on peut inspecter librement — vos assertions portaient sur le **body**, pas sur le subject. `.Received()` verifie des **appels exacts** — si vous avez verifie le sujet, le test casse pour un changement cosmétique qui ne change pas le comportement.
+
+Corrigez les tests NSubstitute qui ont casse, puis gardez le nouveau format — c'est un refactoring legitime.
+
+#### 5b - Evolution : ajouter une formule de politesse
+
+Le product owner demande que les emails de notification soient plus professionnels. Modifiez `NotifyUser` pour formater le body avec une salutation :
+
+```csharp
+var body = $"Bonjour {user.Name},\n\nCordialement,\nL'equipe";
+_emailSender.Send(user.Email, subject, body);
+```
+
+C'est une evolution raisonnable. Lancez **tous** les tests (spy et NSubstitute).
+
+Un des deux suites detecte un probleme. Lequel, et pourquoi l'autre ne le detecte pas ?
+
+Corrigez le body pour inclure le `message` dans la formule de politesse, puis repassez tous les tests au vert.
 
 
 <div class="page" />
@@ -611,8 +641,8 @@ Si certains tests echouent, c'est probablement un probleme d'isolation : un test
 | Fake (implementation simplifiee) | Exercice 1 etape 1, Exercice 2 etape 3 |
 | Spy (enregistre les appels) | Exercice 1 etapes 2-4, Exercice 2 etape 3 |
 | Stub (retourne des valeurs fixes) | Exercice 1 etape 2, Exercice 2 etape 3 |
-| NSubstitute et ses limites | Exercice 1, etape 5 (comparaison) |
-| Couplage mock → implementation | Exercice 1, etape 5 (`.Received()` vs spy) |
+| NSubstitute et ses limites | Exercice 1, etape 5a (refactoring qui casse les mocks) |
+| `Arg.Any<>()` masque les regressions | Exercice 1, etape 5b (evolution qui revele la faiblesse) |
 | Refactoring pour testabilite | Exercice 2, etapes 1-2 |
 | Tester un cas d'erreur (exception) | Exercice 2, etape 4 |
 | Test Data Builder | Exercice 3 |

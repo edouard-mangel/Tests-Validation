@@ -1,0 +1,32 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "seance4-integration", "seance4-integration", "{50CD3D29-3577-9DC2-14F5-C3727802A2E2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tp-starter", "tp-starter", "{2B0B6BCB-E5C0-6695-EBE5-CC1ECB6949EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoApi", "seance4-integration\tp-starter\TodoApi\TodoApi.csproj", "{2397C283-9827-A1FC-73D5-DE48A4D95D28}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2397C283-9827-A1FC-73D5-DE48A4D95D28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2397C283-9827-A1FC-73D5-DE48A4D95D28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2397C283-9827-A1FC-73D5-DE48A4D95D28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2397C283-9827-A1FC-73D5-DE48A4D95D28}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2B0B6BCB-E5C0-6695-EBE5-CC1ECB6949EC} = {50CD3D29-3577-9DC2-14F5-C3727802A2E2}
+		{2397C283-9827-A1FC-73D5-DE48A4D95D28} = {2B0B6BCB-E5C0-6695-EBE5-CC1ECB6949EC}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {00A7574A-9190-4788-9A23-B264447775C4}
+	EndGlobalSection
+EndGlobal
