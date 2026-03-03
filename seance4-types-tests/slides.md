@@ -1,5 +1,5 @@
 ---
-theme: seriph
+theme: the-unnamed
 title: "Tests & Validation - Séance 4"
 info: |
   ## Les types de tests utiles au développeur
@@ -12,6 +12,10 @@ drawings:
 transition: slide-left
 mdc: true
 duration: 90min
+shiki:
+  themes:
+    dark: monokai
+    light: monokai
 ---
 
 # Tests & Validation

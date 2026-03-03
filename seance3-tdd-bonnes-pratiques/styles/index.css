@@ -1,0 +1,8 @@
+/* Dracula palette for inline emphasis */
+:root {
+  --slidev-theme-code-color: #8be9fd; /* Dracula cyan */
+}
+
+.slidev-layout strong {
+  color: #ffb86c; /* Dracula orange */
+}
