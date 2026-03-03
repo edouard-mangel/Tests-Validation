@@ -1,5 +1,5 @@
 ---
-theme: the-unnamed
+theme: ../theme
 title: "Tests & Validation - Séance 3"
 info: |
   ## TDD, bonnes pratiques et doublures de test
