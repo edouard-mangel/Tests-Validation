@@ -2,11 +2,11 @@
 theme: the-unnamed
 title: "Tests & Validation - Séance 4"
 info: |
-  ## Les types de tests utiles au développeur
+  ## Types de tests, intégration et stratégie
   Module Tests & Validation - CNAM
 class: text-center
 author: Edouard Mangel
-keywords: tests, unitaires, intégration, e2e, pyramide des tests
+keywords: tests, unitaires, intégration, e2e, pyramide des tests, testcontainers, contract testing, CI/CD
 drawings:
   persist: false
 transition: slide-left
@@ -16,18 +16,18 @@ duration: 90min
 
 # Tests & Validation
 
-## Séance 4 — Les types de tests utiles au développeur
+## Séance 4 — Types de tests, intégration et stratégie
 
 <br>
 
-*Quels tests existent et à quoi servent-ils ?*
+*Des tests unitaires aux tests d'intégration — comment tester la collaboration entre composants réels.*
 
 <!--
-Objectif de la séance : comprendre les différents niveaux de tests (e2e, intégration, unitaire), savoir quand utiliser chacun, et comprendre la différence entre tester l'implémentation et tester le comportement.
+Objectif de la séance : replacer les tests unitaires dans le cadre global (types de tests, pyramide), comprendre les limites des TU seuls, maîtriser les tests d'intégration (repository, API), et savoir choisir le bon niveau de test.
 
-Pré-requis : TP2 (tests unitaires) et Séance 3 (TDD, FIRST). On élargit maintenant la perspective au-delà des tests unitaires.
+Pré-requis : Séances 1-3 (qualité logicielle, TDD, doublures de test).
 
-Durée prévue : 1h30 de cours + 1h30 de TP
+Durée prévue : 1h30 de cours + 2h de TP
 -->
 
 ---
@@ -42,7 +42,14 @@ Durée prévue : 1h30 de cours + 1h30 de TP
 4. **Les tests end-to-end** — Au plus près de l'utilisateur
 5. **Les tests d'intégration** — Vérifier les connexions
 6. **Les tests unitaires** — Le cœur de la stratégie
-7. **TP** — Écrire ses premiers tests
+7. **Les limites des tests unitaires** — Ce qu'ils ne voient pas
+8. **Tests d'intégration avancés** — Repository, API, WebApplicationFactory
+9. **Les outils** — InMemory, SQLite, Testcontainers
+10. **Contract Testing** — Pact et les contrats entre services
+11. **Property-Based Testing** — Tester des propriétés avec FsCheck
+12. **CI/CD et tests flaky** — Les tests dans le pipeline
+13. **Choisir le bon niveau** — La pyramide comme outil de décision
+14. **TP** — Tests d'intégration sur une Web API ASP.NET
 
 </v-clicks>
 
@@ -73,4 +80,32 @@ src: ./slides/05-tests-integration.md
 
 ---
 src: ./slides/06-tests-unitaires.md
+---
+
+---
+src: ./slides/07-limites-unitaires.md
+---
+
+---
+src: ./slides/08-tests-integration.md
+---
+
+---
+src: ./slides/09-outils.md
+---
+
+---
+src: ./slides/10-contract-testing.md
+---
+
+---
+src: ./slides/11-property-testing.md
+---
+
+---
+src: ./slides/12-ci-cd.md
+---
+
+---
+src: ./slides/13-strategie.md
 ---

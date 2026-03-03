@@ -96,9 +96,9 @@ Coût de correction
 
 <v-click>
 
-Plus un bug est détecté tard, plus il coûte cher à corriger.
+Plus un bug est détecté tard, plus il coûte cher. Les tests automatisés détectent les bugs **au plus tôt**.
 
-Les tests automatisés permettent de détecter les bugs **au plus tôt**.
+Mais **quel type de test** détecte **quel type de bug** ? C'est toute la question de cette séance.
 
 </v-click>
 
@@ -106,4 +106,39 @@ Les tests automatisés permettent de détecter les bugs **au plus tôt**.
 Ce graphique est un classique (issu des études IBM/NIST).
 Le ratio 1x/10x/50x/100x est approximatif mais l'ordre de grandeur est correct.
 Un bug trouvé en production coûte ~100x plus cher qu'un bug trouvé pendant le développement.
+La question de transition : les tests unitaires qu'on maîtrise détectent les bugs de logique. Mais quid des bugs d'intégration ?
+-->
+
+---
+
+# Les trois types de tests du développeur
+
+<br>
+
+En tant que développeur, **trois types** de tests nous concernent directement :
+
+<v-clicks>
+
+| Type | Teste quoi ? | Vitesse | Quantité idéale |
+|------|-------------|---------|-----------------|
+| **Unitaire** | Logique métier isolée | 🚀 ms | Beaucoup |
+| **Intégration** | Communication entre composants | 🚶 secondes | Quelques |
+| **End-to-end** | Parcours utilisateur complet | 🐌 minutes | Peu |
+
+</v-clicks>
+
+<v-click>
+
+<br>
+
+Jusqu'ici on a travaillé sur les **tests unitaires** (séances 2 et 3).
+
+Aujourd'hui : pourquoi ils ne suffisent pas, et quand passer aux niveaux supérieurs.
+
+</v-click>
+
+<!--
+Présentation rapide des 3 types pour poser le cadre.
+Les étudiants connaissent déjà bien les tests unitaires.
+La suite de la séance va montrer les limites des TU seuls, puis introduire les tests d'intégration.
 -->
