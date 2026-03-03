@@ -12,10 +12,6 @@ drawings:
 transition: slide-left
 mdc: true
 duration: 90min
-shiki:
-  themes:
-    dark: monokai
-    light: monokai
 ---
 
 # Tests & Validation
