@@ -10,8 +10,6 @@ On ne teste pas toute la chaîne, juste UNE connexion à la fois.
 -->
 
 ---
-
----
 layout: two-cols-header
 ---
 
@@ -52,12 +50,13 @@ Différence clé avec le e2e : on isole UN sous-système, on ne teste pas toute 
 -->
 
 ---
+layout: two-cols-header
+zoom: 0.9
+---
 
 # Exemple de test d'intégration
 
-<br>
-
-Un test qui vérifie que notre repository fonctionne avec une vraie base de données :
+::left::
 
 ```csharp
 public class UserRepositoryTests : IDisposable
@@ -84,16 +83,17 @@ public class UserRepositoryTests : IDisposable
         var saved = _context.Users.First();  // Assert
         Assert.Equal("Alice", saved.Name);
     }
-
     public void Dispose() => _context.Dispose();
 }
 ```
 
-<v-click>
+::right::
+
+
+Un test qui vérifie que notre repository fonctionne avec une vraie base de données :
 
 On vérifie que la **plomberie fonctionne**, pas la logique métier.
 
-</v-click>
 
 <!--
 UseInMemoryDatabase permet de ne pas avoir besoin d'un vrai serveur SQL.
