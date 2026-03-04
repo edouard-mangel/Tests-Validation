@@ -11,8 +11,8 @@ const style = computed(() => handleBackground(props.background, true))
 </script>
 
 <template>
-  <div class="slidev-layout end h-full grid place-content-center" :style="style">
-    <div class="my-auto flex flex-col justify-center items-center text-center gap-4">
+  <div class="slidev-layout end h-full grid place-content-center px-12" :style="style">
+    <div class="my-auto flex flex-col justify-center items-center text-center gap-4 w-full">
       <slot />
     </div>
   </div>
