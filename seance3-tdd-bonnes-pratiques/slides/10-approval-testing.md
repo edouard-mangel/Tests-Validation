@@ -36,16 +36,17 @@ On l'utilise quand écrire des assertions manuelles serait trop verbeux ou fragi
 -->
 
 ---
+layout: two-cols-header
+zoom: 0.85
+---
 
 # Verify — Approval Testing pour .NET
 
-<br>
+::left::
 
 ```bash
 dotnet add package Verify.Xunit
 ```
-
-<v-click>
 
 ```csharp
 [UsesVerify]
@@ -63,11 +64,11 @@ public class UserServiceTests
 }
 ```
 
-</v-click>
+::right::
 
 <v-click>
 
-Le fichier `GetUserProfile_ReturnsExpectedShape.verified.txt` généré :
+Fichier `GetUserProfile_ReturnsExpectedShape.verified.txt` généré :
 
 ```json
 {

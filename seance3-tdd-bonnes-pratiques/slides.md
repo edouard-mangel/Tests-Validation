@@ -73,6 +73,12 @@ src: ./slides/04-bonnes-pratiques.md
 ---
 
 ---
+layout: section
+---
+
+# Le problème des dépendances
+
+---
 src: ./slides/05-probleme-dependances.md
 ---
 
@@ -95,3 +101,75 @@ src: ./slides/09-test-fixtures.md
 ---
 src: ./slides/10-approval-testing.md
 ---
+
+---
+layout: center
+class: text-center
+---
+
+# TP — Doublures de test
+
+<br>
+
+**Exercice 1** — Tester `NotificationService` avec des stubs et un spy
+
+**Exercice 2** — Refactorer du code couplé, puis le tester
+
+**Exercice 3** — Test Data Builders : simplifier le setup des tests
+
+**Exercice 4** — `IClassFixture` : partager le setup entre les tests
+
+<v-click>
+
+<br>
+
+Un **Test Data Builder** encapsule la construction d'objets de test avec des valeurs par défaut :
+
+```csharp
+var user = new UserBuilder().AsPremium().WithEmail("alice@test.com").Build();
+```
+
+</v-click>
+
+<br>
+
+*"Ai-je testé le comportement ou l'implémentation ?"*
+
+<!--
+Le TP comporte quatre parties :
+1. Un NotificationService avec des dépendances déjà injectées — doublures manuelles puis NSubstitute
+2. Un code tightly coupled — les étudiants refactorent pour injecter les dépendances, puis testent
+3. Les étudiants refactorent le setup de leurs tests pour utiliser le pattern Builder
+4. Les étudiants extraient le setup partagé dans une IClassFixture
+-->
+
+---
+layout: section
+---
+
+# Récapitulatif & TP
+
+---
+layout: center
+class: text-center
+---
+
+# L'automatisation des tests au service de la qualité logicielle
+
+<br>
+
+Tests unitaires · Tests d'intégration · Tests e2e
+
+TDD · FIRST · Testing positif/négatif
+
+<br>
+
+## Passons au TP
+
+*Pratiquer le TDD sur un kata*
+
+<!--
+Conclusion de la séance.
+On a vu les trois approches (After/First/TDD), les principes FIRST, et les bonnes pratiques.
+Le TP va permettre de pratiquer le cycle TDD sur un exercice concret.
+-->

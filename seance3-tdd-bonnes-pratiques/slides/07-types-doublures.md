@@ -149,8 +149,6 @@ C'est rapide, isolé, et on peut pré-remplir les données du test dans le Arran
 
 # Mock
 
-<br>
-
 Un **mock** vérifie qu'une **interaction a bien eu lieu**.
 
 ```csharp
@@ -172,13 +170,9 @@ public void NotifyUser_ExistingUser_SendsEmailWithCorrectSubject()
 
 <v-click>
 
-<br>
-
 ### ⚠️ Attention à l'over-mocking
 
 Les mocks testent les **interactions** (comment le code appelle ses dépendances), pas les **résultats**.
-
-Risque : des tests **couplés à l'implémentation** qui cassent au moindre refactoring.
 
 </v-click>
 
@@ -189,12 +183,15 @@ Préférer les stubs et les fakes quand c'est possible.
 -->
 
 ---
+zoom: 0.9
+--- 
 
 # Spy
 
 <br>
 
-Un **spy** enregistre les appels pour une **assertion ultérieure**.
+Un **spy** enregistre les appels pour une **assertion ultérieure**. 
+C'est un **enregistreur** : il capture les appels, on vérifie après coup.
 
 ```csharp
 public class SpyEmailSender : IEmailSender
@@ -221,12 +218,6 @@ public void NotifyUser_SendsOneEmail()
     Assert.Equal("alice@test.com", spy.SentEmails[0].To);
 }
 ```
-
-<v-click>
-
-Le spy est un **enregistreur** : il capture les appels, on vérifie après coup.
-
-</v-click>
 
 <!--
 La différence avec le mock : le spy ne vérifie rien lui-même. C'est le test qui fait les assertions.
@@ -261,38 +252,3 @@ Si résultat → stub ou fake.
 Si interaction → mock ou spy (mais est-ce vraiment nécessaire ?).
 -->
 
----
-
-# L'angle IA — Tester du code généré
-
-<br>
-
-<v-clicks>
-
-Le code généré par l'IA a souvent un défaut : le **couplage fort**.
-
-```csharp
-// Code typique généré par IA : tout est câblé en dur
-public class OrderService
-{
-    public void ProcessOrder(Order order)
-    {
-        var db = new SqlConnection("...");     // ❌ Couplage
-        var emailClient = new SmtpClient();     // ❌ Couplage
-        var logger = new FileLogger("app.log"); // ❌ Couplage
-        // ...
-    }
-}
-```
-
-Savoir **isoler les dépendances** et **injecter des doublures** est la compétence clé pour :
-- Tester du code que vous n'avez pas écrit
-- Refactorer du code généré pour le rendre testable
-- Vérifier que le code fait **ce qu'il doit faire**, peu importe qui l'a écrit
-
-</v-clicks>
-
-<!--
-Ce n'est pas une critique de l'IA. C'est une réalité : du code couplé est difficile à tester, qu'il soit écrit par un humain ou une IA.
-La compétence : savoir identifier les dépendances et les extraire derrière des interfaces.
--->

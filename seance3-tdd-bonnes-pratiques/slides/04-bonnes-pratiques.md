@@ -135,28 +135,3 @@ C'est le point souvent oublié : on peut avoir 1000 tests parfaits, si personne 
 La CI/CD est la seule garantie que les tests tournent vraiment à chaque changement.
 Un test qui échoue en CI bloque le merge → c'est exactement l'effet recherché.
 -->
-
----
-layout: center
-class: text-center
----
-
-# L'automatisation des tests au service de la qualité logicielle
-
-<br>
-
-Tests unitaires · Tests d'intégration · Tests e2e
-
-TDD · FIRST · Testing positif/négatif
-
-<br>
-
-## Passons au TP
-
-*Pratiquer le TDD sur un kata*
-
-<!--
-Conclusion de la séance.
-On a vu les trois approches (After/First/TDD), les principes FIRST, et les bonnes pratiques.
-Le TP va permettre de pratiquer le cycle TDD sur un exercice concret.
--->

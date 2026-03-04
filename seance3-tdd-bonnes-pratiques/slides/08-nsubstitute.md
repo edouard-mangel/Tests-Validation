@@ -121,17 +121,16 @@ On pourrait aussi utiliser .DidNotReceive() pour vérifier qu'un appel n'a PAS e
 
 </v-clicks>
 
-<v-click>
+---
 
-<br>
+# NSubstitute — Les essentiels
+
 
 ### La règle reste la même
 
 Préférer les **stubs** (`.Returns(...)`) aux **mocks** (`.Received(...)`).
 
 Ne vérifier les interactions que quand c'est le **comportement** qu'on teste.
-
-</v-click>
 
 <!--
 En pratique, 80% de l'utilisation de NSubstitute, c'est Substitute.For + .Returns.
@@ -185,7 +184,7 @@ public void ProcessOrder_SavesOrderAndNotifiesCustomer()
 
 <v-click>
 
-> *"Testez-vous le comportement ou l'implémentation ? Comment le sauriez-vous ?"*
+> *"Testez-vous le comportement ou l'implémentation ? Comment le savoir ?"*
 
 </v-click>
 
@@ -195,43 +194,3 @@ Test de gauche : si on change l'ordre des appels internes, le test casse. Mauvai
 Test de droite : tant que la commande est sauvée et le client notifié, le test passe. Bon signe.
 -->
 
----
-layout: center
-class: text-center
----
-
-# TP — Doublures de test
-
-<br>
-
-**Exercice 1** — Tester `NotificationService` avec des stubs et un spy
-
-**Exercice 2** — Refactorer du code couplé, puis le tester
-
-**Exercice 3** — Test Data Builders : simplifier le setup des tests
-
-**Exercice 4** — `IClassFixture` : partager le setup entre les tests
-
-<v-click>
-
-<br>
-
-Un **Test Data Builder** encapsule la construction d'objets de test avec des valeurs par défaut :
-
-```csharp
-var user = new UserBuilder().AsPremium().WithEmail("alice@test.com").Build();
-```
-
-</v-click>
-
-<br>
-
-*"Ai-je testé le comportement ou l'implémentation ?"*
-
-<!--
-Le TP comporte quatre parties :
-1. Un NotificationService avec des dépendances déjà injectées — doublures manuelles puis NSubstitute
-2. Un code tightly coupled — les étudiants refactorent pour injecter les dépendances, puis testent
-3. Les étudiants refactorent le setup de leurs tests pour utiliser le pattern Builder
-4. Les étudiants extraient le setup partagé dans une IClassFixture
--->

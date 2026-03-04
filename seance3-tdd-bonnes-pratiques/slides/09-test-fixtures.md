@@ -1,6 +1,11 @@
+---
+layout: two-cols-header
+zoom: 0.9
+---
+
 # Le problème du setup répété
 
-<br>
+::left::
 
 ```csharp
 public class NotificationServiceTests
@@ -32,6 +37,8 @@ public class NotificationServiceTests
 }
 ```
 
+::right::
+
 <v-click>
 
 > 2 tests → 2 fois le même bloc Arrange. Et si on ajoute une dépendance au service ?
@@ -44,10 +51,13 @@ xUnit propose des mécanismes intégrés pour résoudre ça : IClassFixture et I
 -->
 
 ---
+zoom: 0.9
+layout: two-cols-header
+---
 
 # IClassFixture — Partager le setup entre tests
 
-<br>
+::left::
 
 ```csharp
 public class DatabaseFixture : IDisposable
@@ -64,6 +74,8 @@ public class DatabaseFixture : IDisposable
     public void Dispose() => Connection.Dispose();
 }
 ```
+
+::right::
 
 <v-click>
 
@@ -95,10 +107,13 @@ Attention : les tests partagent la fixture → ne pas modifier l'état partagé 
 -->
 
 ---
+zoom: 0.9
+layout: two-cols-header
+---
 
 # IAsyncLifetime — Setup/teardown asynchrone
 
-<br>
+::left::
 
 ```csharp
 public class ApiIntegrationTests : IAsyncLifetime
@@ -127,6 +142,7 @@ public class ApiIntegrationTests : IAsyncLifetime
     }
 }
 ```
+::right::
 
 <v-click>
 
