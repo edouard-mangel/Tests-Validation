@@ -54,7 +54,7 @@
   --slidev-theme-section-background: var(--slidev-theme-background);
 
   /*  End */
-  --slidev-theme-end-headingBg: var(--slidev-theme-accents-rose);
+  --slidev-theme-end-headingBg: var(--slidev-theme-accents-yellow);
   --slidev-theme-end-headingColor: var(--slidev-theme-accents-vulcan);
   --slidev-theme-end-background: var(--slidev-theme-background);
 
@@ -389,7 +389,7 @@
     display: inline-block;
     margin-top: 1.5em;
     padding: 0.5em 1.5em;
-    background: var(--slidev-theme-accents-rose);
+    background: var(--slidev-theme-accents-yellow);
     color: var(--slidev-theme-accents-vulcan);
     border-radius: 0.5em;
     font-weight: 700;
