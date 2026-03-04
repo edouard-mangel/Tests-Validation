@@ -14,7 +14,7 @@ layout: two-cols-header
 
 ### Graphe connexe
 
-<img src="images/graphe-connexe.png" class="h-48 mx-auto mt-4" />
+<img src="/images/graphe-connexe.png" class="h-48 mx-auto mt-4" />
 
 <v-click>
 
@@ -28,7 +28,7 @@ Tous les nœuds sont reliés — il existe un chemin entre n'importe quelle pair
 
 ### Graphe non connexe
 
-<img src="images/graphe-non-connexe.png" class="h-48 mx-auto mt-4" />
+<img src="/images/graphe-non-connexe.png" class="h-48 mx-auto mt-4" />
 
 Composé de **sous-graphes** distincts (composantes connexes).
 

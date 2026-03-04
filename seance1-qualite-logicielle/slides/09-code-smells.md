@@ -26,9 +26,9 @@ Défini par **Kent Beck** dans les années 90, popularisé par **Martin Fowler**
 
 <v-clicks>
 
-<img src="images/fowler-refactoring.jpg" class="h-40 mx-auto mb-4" />
+<img src="/images/fowler-refactoring.jpg" class="h-40 mx-auto mb-4" />
 
-<img src="images/refactoring-guru.jpg" class="h-20 mx-auto" />
+<img src="/images/refactoring-guru.jpg" class="h-20 mx-auto" />
 
 *refactoring.guru — catalogue en ligne*
 
