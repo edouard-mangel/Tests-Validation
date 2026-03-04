@@ -1,0 +1,46 @@
+name: Generate TP PDFs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'TP[0-9]*.md'
+      - 'tp.css'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: browser-actions/setup-chrome@v1
+        id: setup-chrome
+
+      - name: Generate PDFs
+        env:
+          CHROME_PATH: ${{ steps.setup-chrome.outputs.chrome-path }}
+        run: |
+          for f in TP[0-9]*.md; do
+            case "$f" in
+              *notes*) echo "Skipping teacher notes: $f" ;;
+              *)
+                echo "Converting: $f"
+                npx --yes md-to-pdf \
+                  --launch-options "{\"executablePath\":\"$CHROME_PATH\",\"args\":[\"--no-sandbox\",\"--disable-setuid-sandbox\"]}" \
+                  --stylesheet tp.css \
+                  "$f"
+                ;;
+            esac
+          done
+
+      - name: Commit PDFs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add TP[0-9]*.pdf
+          git diff --staged --quiet || git commit -m "Generate TP PDFs from markdown"
+          git push
