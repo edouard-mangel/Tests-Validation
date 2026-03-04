@@ -1,6 +1,7 @@
 ---
 layout: image
-image: /images/tests-e2e.png
+image: images/tests-e2e.png
+title: Tests End-to-End (e2e)
 ---
 
 <!--
@@ -8,7 +9,6 @@ Schéma d'architecture : la flèche rouge traverse TOUS les sous-systèmes, du c
 C'est ça un test e2e : on teste la chaîne complète.
 -->
 
----
 
 ---
 layout: two-cols-header

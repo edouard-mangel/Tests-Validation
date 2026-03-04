@@ -58,9 +58,6 @@ Présenter le déroulé. On commence par le "pourquoi", puis on descend la pyram
 La séance se termine sur les tests unitaires — que vous maîtrisez déjà grâce au TP2 et à la séance sur le TDD.
 -->
 
----
-src: ./slides/01-definitions.md
----
 
 ---
 src: ./slides/02-pourquoi-tester.md
