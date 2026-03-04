@@ -134,6 +134,10 @@ class: text-center
 
 *Qu'est-ce que le test d'intégration a attrapé que le test unitaire n'aurait pas vu ?*
 
+<br>
+
+[📄 Télécharger le sujet du TP](/tp4.pdf)
+
 <!--
 Le TP utilise une petite Web API ASP.NET fournie (TodoApi).
 1. Tests de repository avec InMemory puis SQLite — comparer les comportements

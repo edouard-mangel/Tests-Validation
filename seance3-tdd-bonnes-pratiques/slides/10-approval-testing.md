@@ -90,3 +90,26 @@ Le workflow : 1) Exécuter le test, 2) Vérifier le .received.txt, 3) Approuver 
 Très utile en régression : si la sortie change, le test échoue et montre le diff.
 Ce n'est PAS un remplacement des tests comportementaux — c'est un complément pour les sorties complexes.
 -->
+
+---
+layout: center
+class: text-center
+---
+
+# TP — Doublures de test
+
+<br>
+
+**Exercice 1** — Tester `NotificationService` avec des doublures manuelles
+
+**Exercice 2** — Refactorer du code couplé pour le rendre testable
+
+**Exercice 3** — Test Data Builders et `IClassFixture`
+
+<br>
+
+[📄 Télécharger le sujet du TP](/tp3.pdf)
+
+<!--
+TP3 — Doublures de test.
+-->
