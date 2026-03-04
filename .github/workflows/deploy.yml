@@ -29,8 +29,17 @@ jobs:
           node-version: 20
           cache: pnpm
           cache-dependency-path: |
+            seance1-qualite-logicielle/pnpm-lock.yaml
             seance3-tdd-bonnes-pratiques/pnpm-lock.yaml
             seance4-types-tests/pnpm-lock.yaml
+
+      - name: Install dependencies (seance1)
+        working-directory: seance1-qualite-logicielle
+        run: pnpm install
+
+      - name: Build seance1 slides
+        working-directory: seance1-qualite-logicielle
+        run: pnpm build --base /Tests-Validation/seance1/
 
       - name: Install dependencies (seance3)
         working-directory: seance3-tdd-bonnes-pratiques
@@ -50,9 +59,11 @@ jobs:
 
       - name: Assemble site
         run: |
+          mkdir -p dist/seance1
           mkdir -p dist/seance3
           mkdir -p dist/seance4
           cp landing/index.html dist/index.html
+          cp -r seance1-qualite-logicielle/dist/. dist/seance1/
           cp -r seance3-tdd-bonnes-pratiques/dist/. dist/seance3/
           cp -r seance4-types-tests/dist/. dist/seance4/
 
