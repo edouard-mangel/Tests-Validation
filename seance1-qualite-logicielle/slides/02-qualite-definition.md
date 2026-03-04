@@ -40,12 +40,18 @@ Dans le domaine de l'ingénierie logicielle, il n'y a pas de **définition uniqu
 
 Selon le point de vue, les attentes sont différentes :
 
+</v-clicks>
+
+<v-clicks>
+
 - L'utilisateur veut un logiciel **sans bugs** et **rapide**
 - Le développeur veut un code **maintenable** et **lisible**
 - Le responsable sécurité veut un code **sans vulnérabilités**
 - Le chef de projet veut un logiciel **livré dans les délais**
 
-<br>
+</v-clicks>
+
+<v-clicks>
 
 On peut toutefois distinguer différents **paramètres et axes** de la qualité logicielle.
 

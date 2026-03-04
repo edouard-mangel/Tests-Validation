@@ -121,14 +121,16 @@ public class FakeUserRepository : IUserRepository
 
 ```csharp
 [Fact]
-public void GetById_ExistingUser_ReturnsUser()
+public void RegisterUser_NewUser_CanBeRetrievedByName()
 {
     var fakeRepo = new FakeUserRepository();
-    fakeRepo.Add(new User { Id = 1, Name = "Alice" });
+    var service = new UserRegistrationService(fakeRepo);
 
-    var user = fakeRepo.GetById(1);
+    service.Register(new User { Id = 1, Name = "Alice" });
 
-    Assert.Equal("Alice", user?.Name);
+    var users = fakeRepo.GetAll();
+    Assert.Single(users);
+    Assert.Equal("Alice", users[0].Name);
 }
 ```
 
@@ -136,13 +138,14 @@ public void GetById_ExistingUser_ReturnsUser()
 
 <v-click>
 
-Le fake **fonctionne** (stockage en mémoire) mais sans infrastructure réelle (pas de BDD).
+On ne teste **pas le fake**, on teste le **use case** avec le fake comme infrastructure en mémoire.
 
 </v-click>
 
 <!--
 Les fakes sont très utiles pour les repositories. On remplace la base de données par une List<T>.
 C'est rapide, isolé, et on peut pré-remplir les données du test dans le Arrange.
+On ne teste pas le fake lui-même — on teste le service métier en utilisant le fake comme collaborateur.
 -->
 
 ---

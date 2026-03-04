@@ -29,24 +29,6 @@ Niveau : FIP 2A 2025-2026
 Durée prévue : 1h30 de cours
 -->
 
----
-
-# Plan de la séance
-
-<v-clicks>
-
-1. **Organisation du module** — 7 séances + évaluation
-2. **La qualité logicielle** — Définitions et axes
-3. **Les 5 axes CISQ** — Fiabilité, Efficacité, Sécurité, Maintenabilité, Taille
-4. **Caractéristiques mesurables** — Documentation, Pratiques, Complexité, Architecture
-5. **Métriques** — Couplage, Complexité cyclomatique, Cohésion
-6. **Code smells** — Les indicateurs de problèmes
-
-</v-clicks>
-
-<!--
-Présenter le déroulé. On part de la notion abstraite de qualité, puis on descend vers les outils concrets de mesure.
--->
 
 ---
 src: ./slides/01-organisation.md
