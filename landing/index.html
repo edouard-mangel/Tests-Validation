@@ -114,6 +114,58 @@
       color: #475569;
     }
 
+    .section-label {
+      width: 100%;
+      max-width: 960px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #475569;
+      margin-top: 2.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .tp-list {
+      width: 100%;
+      max-width: 960px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .tp-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.875rem 1.25rem;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #e2e8f0;
+      font-size: 0.95rem;
+      transition: border-color 0.2s;
+    }
+
+    .tp-link:hover { border-color: #38bdf8; }
+
+    .tp-num {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      background: #334155;
+      color: #94a3b8;
+      white-space: nowrap;
+    }
+
+    .tp-download {
+      margin-left: auto;
+      font-size: 0.8rem;
+      color: #38bdf8;
+    }
+
     footer {
       margin-top: 4rem;
       color: #475569;
@@ -185,6 +237,30 @@
         Bientôt disponible
       </div>
     </div>
+
+  </div>
+
+  <p class="section-label">Travaux pratiques</p>
+
+  <div class="tp-list">
+
+    <a href="./tp/tp2.pdf" class="tp-link" download>
+      <span class="tp-num">TP2</span>
+      <span>Les bases des tests unitaires</span>
+      <span class="tp-download">Télécharger PDF ↓</span>
+    </a>
+
+    <a href="./tp/tp3.pdf" class="tp-link" download>
+      <span class="tp-num">TP3</span>
+      <span>Doublures de test et isolation</span>
+      <span class="tp-download">Télécharger PDF ↓</span>
+    </a>
+
+    <a href="./tp/tp4.pdf" class="tp-link" download>
+      <span class="tp-num">TP4</span>
+      <span>Tests d'intégration</span>
+      <span class="tp-download">Télécharger PDF ↓</span>
+    </a>
 
   </div>
 

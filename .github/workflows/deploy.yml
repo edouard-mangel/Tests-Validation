@@ -68,15 +68,15 @@ jobs:
 
       - name: Assemble site
         run: |
-          mkdir -p dist/seance1
-          mkdir -p dist/seance2
-          mkdir -p dist/seance3
-          mkdir -p dist/seance4
+          mkdir -p dist/seance1 dist/seance2 dist/seance3 dist/seance4 dist/tp
           cp landing/index.html dist/index.html
           cp -r seance1-qualite-logicielle/dist/. dist/seance1/
           cp -r seance2-tests-unitaires-xunit/dist/. dist/seance2/
           cp -r seance3-tdd-bonnes-pratiques/dist/. dist/seance3/
           cp -r seance4-types-tests/dist/. dist/seance4/
+          cp "TP2 - les bases des tests unitaires.pdf" dist/tp/tp2.pdf 2>/dev/null || true
+          cp "TP3 - doublures de test.pdf"             dist/tp/tp3.pdf 2>/dev/null || true
+          cp "TP4 - tests integration.pdf"             dist/tp/tp4.pdf 2>/dev/null || true
 
       - uses: actions/upload-pages-artifact@v3
         with:
