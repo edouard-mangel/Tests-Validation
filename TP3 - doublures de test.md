@@ -11,12 +11,16 @@
 
 ## Mise en place
 
-Creez un nouveau projet de test xUnit dans votre solution :
+Clonez le projet de démarrage et installez les dépendances :
 
 ```bash
-dotnet new xunit -n TestingTP3.Tests
-dotnet add TestingTP3.Tests package NSubstitute
+git clone https://github.com/edouard-mangel/clean-code-tp3
+cd clean-code-tp3
+dotnet restore
+dotnet test
 ```
+
+Vous verrez des tests échouer — c'est votre travail de les faire passer au vert.
 
 
 <div class="page" />
@@ -26,261 +30,61 @@ dotnet add TestingTP3.Tests package NSubstitute
 
 ### Contexte
 
-Votre equipe a developpe un `NotificationService` plus complet que celui vu en cours. Il gere l'envoi d'emails et de SMS, avec un systeme d'opt-out pour les utilisateurs.
+Ouvrez `TestingTP3/` et parcourez les fichiers du projet de production :
 
-Voici les interfaces et les classes du domaine :
+- **`Interfaces.cs`** — quatre interfaces : `IUserRepository`, `IEmailSender`, `ISmsSender`, `IClock`. Chacune représente une dépendance externe que le service recevra par injection.
+- **`User.cs`** — le modèle : `Id`, `Name`, `Email`, `Phone`, `HasOptedOut`.
+- **`NotificationService.cs`** — le service à tester. Repérez ses trois méthodes publiques (`NotifyUser`, `SendUrgentNotification`, `NotifyAllUsers`) et notez comment chacune gère l'opt-out.
 
-```csharp
-namespace TestingTP3;
+Vous ne touchez pas à ces fichiers. Votre travail se passe entièrement dans `TestingTP3.Tests/`.
 
-public class User
-{
-    public int Id { get; set; }
-    public string Name { get; set; } = "";
-    public string Email { get; set; } = "";
-    public string Phone { get; set; } = "";
-    public bool HasOptedOut { get; set; }
-}
+### Etape 1 - Explorer le FakeUserRepository (10 min)
 
-public interface IUserRepository
-{
-    User? GetById(int id);
-    List<User> GetAll();
-}
+Ouvrez `TestDoubles/FakeUserRepository.cs`.
 
-public interface IEmailSender
-{
-    void Send(string to, string subject, string body);
-}
+Un **fake** est une implémentation simplifiée mais fonctionnelle. Remarquez :
+- Il stocke les utilisateurs dans une `List<User>` en mémoire — pas de vraie base de données.
+- La méthode `Add(User)` n'existe pas dans `IUserRepository` : c'est une **extension du fake** qui permet au test de peupler les données sans passer par l'interface du domaine.
+- `GetAll()` retourne `_users.ToList()` — une copie, pour éviter que le test modifie la liste interne.
 
-public interface ISmsSender
-{
-    void Send(string phoneNumber, string message);
-}
+Ce fake remplace une vraie base de données : rapide, isolé, entièrement contrôlable.
 
-public interface IClock
-{
-    DateTime Now { get; }
-}
-```
+### Etape 2 - Explorer les Spy et le premier test (10 min)
 
-Et voici l'implementation du service :
+Ouvrez `TestDoubles/SpyEmailSender.cs`.
 
-```csharp
-namespace TestingTP3;
+Un **spy** enregistre les appels pour qu'on puisse vérifier ce qui s'est passé. Remarquez que `SentEmails` est une liste de tuples nommés `(To, Subject, Body)` — cela permet des assertions précises sur chaque champ sans avoir à créer une classe dédiée.
 
-public class NotificationService
-{
-    private readonly IUserRepository _users;
-    private readonly IEmailSender _emailSender;
-    private readonly ISmsSender _smsSender;
-    private readonly IClock _clock;
+Ouvrez aussi `TestDoubles/SpySmsSender.cs` et `TestDoubles/StubClock.cs`. Le **stub** d'horloge retourne toujours la même date : c'est ce qui rend les assertions sur les timestamps déterministes.
 
-    public NotificationService(
-        IUserRepository users,
-        IEmailSender emailSender,
-        ISmsSender smsSender,
-        IClock clock)
-    {
-        _users = users;
-        _emailSender = emailSender;
-        _smsSender = smsSender;
-        _clock = clock;
-    }
+Ouvrez maintenant `Exercice1/NotificationServiceTests.cs`. Le premier test `NotifyUser_ExistingUser_SendsEmail` est déjà écrit et compilé. Lisez-le attentivement :
+- Comment les doublures sont câblées ensemble via le constructeur de `NotificationService`.
+- Pourquoi l'assertion porte sur `Body` et non sur `Subject`.
 
-    public void NotifyUser(int userId, string message)
-    {
-        var user = _users.GetById(userId);
-        if (user is null) return;
-        if (user.HasOptedOut) return;
-
-        _emailSender.Send(
-            user.Email,
-            $"Notification du {_clock.Now:dd/MM/yyyy}",
-            message);
-    }
-
-    public void SendUrgentNotification(int userId, string message)
-    {
-        var user = _users.GetById(userId);
-        if (user is null) return;
-
-        // Les notifications urgentes ignorent l'opt-out
-        _emailSender.Send(user.Email, "URGENT", message);
-        _smsSender.Send(user.Phone, $"URGENT: {message}");
-    }
-
-    public void NotifyAllUsers(string message)
-    {
-        var users = _users.GetAll();
-        foreach (var user in users)
-        {
-            if (!user.HasOptedOut)
-            {
-                _emailSender.Send(
-                    user.Email,
-                    $"Notification du {_clock.Now:dd/MM/yyyy}",
-                    message);
-            }
-        }
-    }
-}
-```
-
-### Etape 1 - Ecrire un FakeUserRepository (10 min)
-
-Un **fake** est une implementation simplifiee mais fonctionnelle. Creez un `FakeUserRepository` qui stocke les utilisateurs en memoire :
-
-```csharp
-using TestingTP3;
-
-namespace TestingTP3.Tests;
-
-public class FakeUserRepository : IUserRepository
-{
-    private readonly List<User> _users = new();
-
-    public void Add(User user) => _users.Add(user);
-
-    public User? GetById(int id) => _users.FirstOrDefault(u => u.Id == id);
-
-    public List<User> GetAll() => _users.ToList();
-}
-```
-
-Ce fake remplace une vraie base de donnees. Il est rapide, isole, et on controle entierement son contenu.
-
-### Etape 2 - Ecrire un SpyEmailSender et tester NotifyUser (10 min)
-
-Un **spy** enregistre les appels pour qu'on puisse verifier ce qui s'est passe. Creez un `SpyEmailSender` :
-
-```csharp
-public class SpyEmailSender : IEmailSender
-{
-    public List<(string To, string Subject, string Body)> SentEmails { get; } = new();
-
-    public void Send(string to, string subject, string body)
-    {
-        SentEmails.Add((to, subject, body));
-    }
-}
-```
-
-Ecrivez maintenant votre premier test. Il verifie que `NotifyUser` envoie un email a un utilisateur existant :
-
-```csharp
-using TestingTP3;
-
-namespace TestingTP3.Tests;
-
-public class NotificationServiceTests
-{
-    [Fact]
-    public void NotifyUser_ExistingUser_SendsEmail()
-    {
-        // Arrange
-        var repo = new FakeUserRepository();
-        repo.Add(new User { Id = 1, Email = "alice@test.com", Phone = "0600000001" });
-
-        var emailSpy = new SpyEmailSender();
-        var smsSpy = new SpySmsSender();
-        var clock = new StubClock(new DateTime(2025, 6, 15));
-
-        var service = new NotificationService(repo, emailSpy, smsSpy, clock);
-
-        // Act
-        service.NotifyUser(1, "Bienvenue !");
-
-        // Assert
-        Assert.Single(emailSpy.SentEmails);
-        Assert.Equal("alice@test.com", emailSpy.SentEmails[0].To);
-        Assert.Contains("Bienvenue !", emailSpy.SentEmails[0].Body);
-    }
-}
-```
-
-Il vous manque `SpySmsSender` et `StubClock`. Ecrivez-les sur le meme modele :
-
-```csharp
-public class SpySmsSender : ISmsSender
-{
-    public List<(string PhoneNumber, string Message)> SentMessages { get; } = new();
-
-    public void Send(string phoneNumber, string message)
-    {
-        SentMessages.Add((phoneNumber, message));
-    }
-}
-
-public class StubClock : IClock
-{
-    private readonly DateTime _now;
-    public StubClock(DateTime now) => _now = now;
-    public DateTime Now => _now;
-}
-```
-
-Lancez le test. Il doit passer au vert.
+Lancez `dotnet test` — ce test doit passer au vert.
 
 ### Etape 3 - Tester les autres cas (10 min)
 
-Ecrivez les tests suivants. Les signatures sont fournies, le corps est a completer :
+Les quatre tests suivants sont dans `Exercice1/NotificationServiceTests.cs`, squelettisés avec un `// Arrange / Act / Assert` et un `throw NotImplementedException`. Complétez le corps de chaque test :
 
-```csharp
-[Fact]
-public void NotifyUser_UserNotFound_DoesNotSendEmail()
-{
-    // Arrange — repo vide, pas d'utilisateur avec l'id 999
-    // Act — NotifyUser(999, ...)
-    // Assert — emailSpy.SentEmails doit etre vide
-}
-
-[Fact]
-public void NotifyUser_UserOptedOut_DoesNotSendEmail()
-{
-    // Arrange — ajouter un utilisateur avec HasOptedOut = true
-    // Act — NotifyUser(...)
-    // Assert — emailSpy.SentEmails doit etre vide
-}
-
-[Fact]
-public void SendUrgentNotification_ExistingUser_SendsEmailAndSms()
-{
-    // Arrange — ajouter un utilisateur
-    // Act — SendUrgentNotification(...)
-    // Assert — emailSpy ET smsSpy doivent avoir recu un message
-}
-
-[Fact]
-public void SendUrgentNotification_UserOptedOut_SendsAnyway()
-{
-    // Arrange — ajouter un utilisateur avec HasOptedOut = true
-    // Act — SendUrgentNotification(...)
-    // Assert — les notifications urgentes ignorent l'opt-out
-}
-```
+- `NotifyUser_UserNotFound_DoesNotSendEmail` — repo vide, NotifyUser(999, ...), vérifiez que `SentEmails` est vide.
+- `NotifyUser_UserOptedOut_DoesNotSendEmail` — utilisateur avec `HasOptedOut = true`, vérifiez l'absence d'envoi.
+- `SendUrgentNotification_ExistingUser_SendsEmailAndSms` — vérifiez que les deux spies reçoivent un message.
+- `SendUrgentNotification_UserOptedOut_SendsAnyway` — les urgentes ignorent l'opt-out.
 
 ### Etape 4 - Tester NotifyAllUsers avec le spy (10 min)
 
-Ecrivez un test pour `NotifyAllUsers` en utilisant vos doublures manuelles.
+Le test `NotifyAllUsers_SendsEmailOnlyToActiveUsers` est aussi dans `NotificationServiceTests.cs`.
 
-Ajoutez 3 utilisateurs au `FakeUserRepository` : 2 actifs et 1 avec opt-out. Appelez `NotifyAllUsers`, puis verifiez avec le spy :
+Peuplez le `FakeUserRepository` avec 3 utilisateurs : 2 actifs et 1 avec opt-out. Appelez `NotifyAllUsers`, puis vérifiez avec le spy que `SentEmails` contient exactement 2 emails.
 
-```csharp
-[Fact]
-public void NotifyAllUsers_SendsEmailOnlyToActiveUsers()
-{
-    // Arrange — 3 utilisateurs : Alice (active), Bob (active), Charlie (opted out)
-    // Act — NotifyAllUsers("Mise a jour")
-    // Assert — emailSpy.SentEmails contient 2 emails (Alice et Bob, pas Charlie)
-}
-```
-
-Remarquez comme le spy rend l'assertion naturelle : on inspecte les emails **reellement captures** et on verifie leur contenu.
+Remarquez comme le spy rend l'assertion naturelle : on inspecte les emails **réellement capturés** et on vérifie leur contenu.
 
 ### Etape 5 - Le meme test avec NSubstitute : comparer les approches (15 min)
 
-Reecrivez maintenant **les memes tests** avec NSubstitute. Voici les operations cles :
+Ouvrez `Exercice1/NotificationServiceNSubTests.cs`. Les deux méthodes squelettisées y sont prêtes.
+
+Voici les opérations clés NSubstitute :
 
 | Operation | Syntaxe NSubstitute |
 |-----------|-------------------|
@@ -290,7 +94,7 @@ Reecrivez maintenant **les memes tests** avec NSubstitute. Voici les operations 
 | Verifier l'absence d'appel | `emailSender.DidNotReceive().Send(...)` |
 | Accepter n'importe quel argument | `Arg.Any<string>()` |
 
-Creez une nouvelle classe `NotificationServiceNSubTests` et reecrivez ces deux tests avec NSubstitute :
+Implémentez les deux tests :
 
 1. `NotifyUser_ExistingUser_SendsEmail` — verifiez avec `.Received(1).Send(...)` au lieu du spy
 2. `NotifyAllUsers_SendsEmailOnlyToActiveUsers` — configurez `GetAll().Returns(...)`, puis verifiez avec `.Received()` et `.DidNotReceive()` pour chaque utilisateur
@@ -314,7 +118,7 @@ Lancez **tous** les tests. Constatez :
 - Quels tests de la version **spy** cassent ? Pourquoi ?
 - Quels tests de la version **NSubstitute** cassent ? Pourquoi ?
 
-Le spy capture des **donnees** qu'on peut inspecter librement — vos assertions portaient sur le **body**, pas sur le subject. `.Received()` verifie des **appels exacts** — si vous avez verifie le sujet, le test casse pour un changement cosmétique qui ne change pas le comportement.
+Le spy capture des **données** qu'on peut inspecter librement — vos assertions portaient sur le **body**, pas sur le subject. `.Received()` verifie des **appels exacts** — si vous avez verifie le sujet, le test casse pour un changement cosmétique qui ne change pas le comportement.
 
 Corrigez les tests NSubstitute qui ont casse, puis gardez le nouveau format — c'est un refactoring legitime.
 
@@ -342,36 +146,15 @@ Corrigez le body pour inclure le `message` dans la formule de politesse, puis re
 
 ### Contexte
 
-Vous heritez d'un `ReportGenerator` ecrit par un collegue presse. Le code fonctionne, mais il est **impossible a tester** car toutes les dependances sont creees en interne.
+Ouvrez `TestingTP3/ReportGenerator.cs`.
 
-```csharp
-namespace TestingTP3;
+Le code original — mis en commentaire dans le fichier — ressemble à ce qu'écrit un collègue pressé : `SqlConnection` créée en interne, `DateTime.Now` appelé directement, `SmtpClient` instancié sur place. Tout est câblé en dur. Il est **impossible a tester** car toutes les dependances sont creees en interne.
 
-public class ReportGenerator
-{
-    public void GenerateAndSend(string reportName, string recipientEmail)
-    {
-        // Dependance 1 : acces direct a la base de donnees
-        var connection = new SqlConnection("Server=prod;Database=reports;...");
-        connection.Open();
-        var data = connection.Query($"SELECT * FROM ReportData WHERE Name = '{reportName}'");
-        connection.Close();
-
-        // Dependance 2 : horloge systeme
-        var timestamp = DateTime.Now;
-
-        // Dependance 3 : envoi d'email
-        var smtp = new SmtpClient("smtp.company.com");
-        var body = $"Rapport '{reportName}' genere le {timestamp:dd/MM/yyyy HH:mm}\n\n"
-                 + $"Donnees : {data.Count()} lignes";
-        smtp.Send(new MailMessage("reports@company.com", recipientEmail, reportName, body));
-    }
-}
-```
+Votre mission : refactorer `GenerateAndSend` pour qu'il reçoive ses dépendances par injection.
 
 ### Etape 1 - Identifier les dependances (5 min)
 
-Lisez le code et repondez a ces questions :
+Lisez les commentaires dans `ReportGenerator.cs` et répondez à ces questions :
 
 1. Combien de dependances externes ce code a-t-il ?
 2. Lesquelles empechent les tests unitaires ?
@@ -379,105 +162,34 @@ Lisez le code et repondez a ces questions :
 
 ### Etape 2 - Extraire les interfaces et refactorer (10 min)
 
-Definissez les trois interfaces suivantes :
+Les interfaces sont déjà déclarées dans `TestingTP3/Interfaces.cs` : `IReportRepository`, `IReportSender` et `IClock` (partagée avec l'exercice 1). `ReportData` est dans `ReportData.cs`.
 
-```csharp
-public interface IReportRepository
-{
-    ReportData GetByName(string reportName);
-}
-
-public interface IReportSender
-{
-    void Send(string to, string subject, string body);
-}
-
-public interface IClock
-{
-    DateTime Now { get; }
-}
-
-public class ReportData
-{
-    public string Name { get; set; } = "";
-    public int RowCount { get; set; }
-}
-```
-
-Refactorez `ReportGenerator` pour qu'il recoive ses dependances par le constructeur. L'implementation doit :
-- Appeler `_repository.GetByName(reportName)` pour obtenir les donnees
-- Utiliser `_clock.Now` pour l'horodatage
-- Appeler `_sender.Send(recipientEmail, reportName, body)` pour envoyer le rapport
+Complétez `ReportGenerator.cs` :
+- Ajoutez les champs privés et un constructeur qui reçoit `IReportRepository`, `IReportSender` et `IClock`
+- Implémentez `GenerateAndSend` :
+  - Appeler `_repository.GetByName(reportName)` pour obtenir les donnees
+  - Utiliser `_clock.Now` pour l'horodatage
+  - Appeler `_sender.Send(recipientEmail, reportName, body)` pour envoyer le rapport
 
 ### Etape 3 - Ecrire les tests avec des doublures manuelles (15 min)
 
-Comme pour l'exercice 1, creez des doublures manuelles pour vos interfaces :
+Les doublures sont déjà dans `TestDoubles/` :
 
-```csharp
-public class FakeReportRepository : IReportRepository
-{
-    private readonly Dictionary<string, ReportData> _reports = new();
+- **`FakeReportRepository`** — stocke les rapports dans un `Dictionary`. Remarquez qu'il lève une `InvalidOperationException` si le rapport est introuvable : c'est un comportement fonctionnel, pas juste un retour vide.
+- **`SpyReportSender`** — enregistre les rapports envoyés dans une liste de tuples `(To, Subject, Body)`.
+- **`StubClock`** — déjà utilisé en exercice 1, réutilisez-le ici.
 
-    public void Add(string name, ReportData report) => _reports[name] = report;
+Ouvrez `Exercice2/ReportGeneratorTests.cs`. Les trois tests sont squelettisés. Complétez le corps de chacun en utilisant ces doublures :
 
-    public ReportData GetByName(string reportName)
-        => _reports.TryGetValue(reportName, out var report)
-            ? report
-            : throw new InvalidOperationException($"Report '{reportName}' not found");
-}
-
-public class SpyReportSender : IReportSender
-{
-    public List<(string To, string Subject, string Body)> SentReports { get; } = new();
-
-    public void Send(string to, string subject, string body)
-    {
-        SentReports.Add((to, subject, body));
-    }
-}
-```
-
-Ecrivez les tests suivants. Les noms sont fournis, le corps est a ecrire :
-
-```csharp
-public class ReportGeneratorTests
-{
-    [Fact]
-    public void GenerateAndSend_ValidReport_SendsEmailToRecipient()
-    {
-        // Verifier que le rapport est envoye au bon destinataire
-    }
-
-    [Fact]
-    public void GenerateAndSend_ValidReport_IncludesTimestampInBody()
-    {
-        // Verifier que le corps du mail contient la date formatee
-    }
-
-    [Fact]
-    public void GenerateAndSend_ValidReport_IncludesRowCountInBody()
-    {
-        // Verifier que le corps du mail contient le nombre de lignes
-    }
-}
-```
-
-Pour chaque test, utilisez vos doublures manuelles : `FakeReportRepository` (avec des donnees pre-remplies), `SpyReportSender` (pour verifier ce qui a ete envoye), et `StubClock` (pour controler la date).
+- `GenerateAndSend_ValidReport_SendsEmailToRecipient` — vérifiez que le rapport est envoyé au bon destinataire
+- `GenerateAndSend_ValidReport_IncludesTimestampInBody` — vérifiez que le corps du mail contient la date formatée
+- `GenerateAndSend_ValidReport_IncludesRowCountInBody` — vérifiez que le corps du mail contient le nombre de lignes
 
 ### Etape 4 - Tester le cas d'erreur (10 min)
 
 **Objectif** : tester ce qui se passe quand le repository leve une exception.
 
-Le `FakeReportRepository` leve deja une `InvalidOperationException` quand le rapport n'existe pas. Ecrivez un test qui appelle `GenerateAndSend` avec un nom de rapport inexistant et verifiez le comportement :
-
-```csharp
-[Fact]
-public void GenerateAndSend_UnknownReport_ThrowsException()
-{
-    // Arrange — un FakeReportRepository VIDE (pas de rapport ajoute)
-    // Act + Assert — Assert.Throws<InvalidOperationException>(...)
-}
-```
+Le quatrième test `GenerateAndSend_UnknownReport_ThrowsException` est dans `Exercice2/ReportGeneratorTests.cs`. Utilisez un `FakeReportRepository` vide (sans rapport ajouté) et vérifiez avec `Assert.Throws<InvalidOperationException>(...)`.
 
 Aucun besoin de framework de mocking : le fake gere naturellement le cas d'erreur.
 
@@ -496,33 +208,10 @@ Le pattern **Test Data Builder** encapsule cette construction avec des valeurs p
 
 ### Etape 1 - Observer le pattern Builder (5 min)
 
-Voici un `UserBuilder` qui simplifie la creation d'utilisateurs de test :
-
-```csharp
-public class UserBuilder
-{
-    private int _id = 1;
-    private string _name = "Alice";
-    private string _email = "alice@test.com";
-    private string _phone = "0600000001";
-    private bool _hasOptedOut = false;
-
-    public UserBuilder WithId(int id) { _id = id; return this; }
-    public UserBuilder WithName(string name) { _name = name; return this; }
-    public UserBuilder WithEmail(string email) { _email = email; return this; }
-    public UserBuilder WithPhone(string phone) { _phone = phone; return this; }
-    public UserBuilder AsOptedOut() { _hasOptedOut = true; return this; }
-
-    public User Build() => new User
-    {
-        Id = _id,
-        Name = _name,
-        Email = _email,
-        Phone = _phone,
-        HasOptedOut = _hasOptedOut
-    };
-}
-```
+Ouvrez `Builders/UserBuilder.cs`. Remarquez :
+- Chaque champ a une valeur par défaut sensée (`_id = 1`, `_name = "Alice"`, etc.).
+- Les méthodes fluentes retournent `this` — ce qui permet le chaînage.
+- `AsOptedOut()` est sémantique : elle exprime l'intention du test, pas un détail d'implémentation.
 
 Comparez ces deux blocs Arrange :
 
@@ -539,19 +228,15 @@ Le builder met en avant **ce qui compte** pour le test et masque le bruit.
 
 ### Etape 2 - Implementer un ReportDataBuilder (5 min)
 
-Implementez un builder pour `ReportData` avec cette API fluente :
+Ouvrez `Builders/ReportDataBuilder.cs`. Le squelette est là, les `TODO` indiquent ce qu'il faut compléter.
+
+L'usage cible :
 
 ```csharp
-public class ReportDataBuilder
-{
-    // Valeurs par defaut
-    // Methodes fluentes : WithName(string), WithRowCount(int)
-    // Methode Build() qui retourne un ReportData
-}
-
-// Utilisation cible :
 var report = new ReportDataBuilder().WithName("Ventes Q1").WithRowCount(150).Build();
 ```
+
+Implémentez les valeurs par défaut, les méthodes fluentes `WithName` et `WithRowCount`, et la méthode `Build`.
 
 ### Etape 3 - Refactorer vos tests existants (5 min)
 
@@ -576,31 +261,11 @@ Regardez vos tests de l'exercice 1. Quel code est duplique dans chaque methode d
 
 Listez les lignes qui apparaissent dans au moins 3 tests.
 
-### Etape 2 - Creer une fixture partagee (7 min)
+### Etape 2 - Utiliser la fixture partagee (7 min)
 
-Creez une classe `NotificationTestFixture` qui contient le setup commun :
+Ouvrez `Fixtures/NotificationTestFixture.cs`. La fixture est déjà écrite : elle instancie toutes les doublures et le service dans son constructeur, et expose chaque doublure via une propriété publique.
 
-```csharp
-public class NotificationTestFixture
-{
-    public FakeUserRepository UserRepo { get; }
-    public SpyEmailSender EmailSpy { get; }
-    public SpySmsSender SmsSpy { get; }
-    public StubClock Clock { get; }
-    public NotificationService Service { get; }
-
-    public NotificationTestFixture()
-    {
-        UserRepo = new FakeUserRepository();
-        EmailSpy = new SpyEmailSender();
-        SmsSpy = new SpySmsSender();
-        Clock = new StubClock(new DateTime(2025, 6, 15));
-        Service = new NotificationService(UserRepo, EmailSpy, SmsSpy, Clock);
-    }
-}
-```
-
-Modifiez votre classe de test pour utiliser `IClassFixture<NotificationTestFixture>` :
+Modifiez `Exercice1/NotificationServiceTests.cs` pour utiliser `IClassFixture<NotificationTestFixture>` :
 
 ```csharp
 public class NotificationServiceTests : IClassFixture<NotificationTestFixture>
@@ -621,7 +286,7 @@ public class NotificationServiceTests : IClassFixture<NotificationTestFixture>
 }
 ```
 
-**Attention** : avec `IClassFixture`, la fixture est partagee entre tous les tests. Vos tests doivent-ils etre adaptes pour rester isoles ? Reflechissez-y.
+**Attention** : avec `IClassFixture`, la fixture est partagee entre tous les tests de la classe. Vos tests doivent-ils etre adaptes pour rester isoles ? Reflechissez-y.
 
 ### Etape 3 - Verifier que tout fonctionne (5 min)
 

@@ -20,9 +20,7 @@ layout: section
 
 </v-click>
 
-<v-clicks>
-
-<br>
+<v-clicks depth="2">
 
 - **Couplage fort** — un changement dans A nécessite un changement dans B
 - **Couplage faible** — A et B sont indépendants, A peut changer sans impacter B
@@ -58,11 +56,15 @@ Schéma illustrant le couplage fort vs faible entre composants.
 
 </v-click>
 
-<v-clicks>
+<v-click>
 
 <br>
 
 **Comment réduire le couplage ?**
+
+</v-click>
+
+<v-clicks depth="2">
 
 - Passer par des **interfaces** plutôt que des implémentations concrètes
 - Utiliser l'**injection de dépendances**

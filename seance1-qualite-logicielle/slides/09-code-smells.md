@@ -12,7 +12,7 @@ layout: two-cols-header
 
 ::left::
 
-<v-clicks>
+<v-clicks depth="2">
 
 Un **code smell** est une caractéristique qui indique la **probabilité d'un problème plus important**.
 
@@ -24,7 +24,7 @@ Défini par **Kent Beck** dans les années 90, popularisé par **Martin Fowler**
 
 ::right::
 
-<v-clicks>
+<v-clicks depth="2">
 
 <img src="/images/fowler-refactoring.jpg" class="h-40 mx-auto mb-4" />
 
@@ -47,18 +47,22 @@ Martin Fowler a documenté 22 types de code smells dans son livre. Refactoring.g
 
 <br>
 
-<v-clicks>
+<v-clicks depth="2">
 
 - **Long Method** — toute méthode faisant plus de 30 lignes de code
 - **Large Class** — toute classe contenant trop de champs, méthodes, etc.
 - **Long Parameter List** — méthode prenant plus de 3 arguments
+
+</v-clicks>
+
+<v-click>
 
 <br>
 
 > Une méthode longue cache souvent plusieurs responsabilités.
 > Une classe large manque de cohésion.
 
-</v-clicks>
+</v-click>
 
 <!--
 La règle des 30 lignes est indicative. L'important : une méthode = une seule chose.
@@ -73,17 +77,21 @@ Long parameter list : souvent le signe qu'un objet manque (ces 4 paramètres for
 
 <br>
 
-<v-clicks>
+<v-clicks depth="2">
 
 - **Large Switch Statement** — `if/else` avec trop de conditions (à remplacer par du polymorphisme)
 - **Shotgun Surgery** — tout changement dans A doit se répercuter dans de nombreuses autres classes
 - **Parallel Inheritance Hierarchy** — créer une sous-classe de A oblige à créer une sous-classe de B
 
+</v-clicks>
+
+<v-click>
+
 <br>
 
 > Ces smells indiquent un **couplage fort** ou une **mauvaise abstraction**.
 
-</v-clicks>
+</v-click>
 
 <!--
 Le Shotgun Surgery est particulièrement douloureux : modifier une règle métier oblige à toucher 15 fichiers.
@@ -98,18 +106,22 @@ La solution : centraliser la logique dans une seule classe bien cohésive.
 
 <br>
 
-<v-clicks>
+<v-clicks depth="2">
 
 - **Commentaires inutiles** — tout commentaire qui "explique" ce que fait le code
   *(si le code a besoin d'être expliqué, il faut le réécrire)*
 - **Code mort** — code jamais appelé, ou commenté
 - **Speculative Generality** — code écrit "pour plus tard" qui ne sert à rien aujourd'hui
 
+</v-clicks>
+
+<v-click>
+
 <br>
 
 > *"You Ain't Gonna Need It"* — YAGNI
 
-</v-clicks>
+</v-click>
 
 <!--
 Le code mort est dangereux car il crée de la confusion et peut masquer de vraies failles.
@@ -125,7 +137,7 @@ YAGNI : ne pas anticiper des besoins hypothétiques. C'est une des causes princi
 
 <br>
 
-<v-clicks>
+<v-clicks depth="2">
 
 - **Feature Envy** — un traitement sur des données d'une classe A est régulièrement fait dans une classe B
   *(le code "envie" d'être ailleurs)*
@@ -133,11 +145,15 @@ YAGNI : ne pas anticiper des besoins hypothétiques. C'est une des causes princi
   *(violation de la Loi de Déméter)*
 - **Middle Man** — classe qui ne fait que déléguer tous ses appels à une autre classe
 
+</v-clicks>
+
+<v-click>
+
 <br>
 
 > Ces smells indiquent que les responsabilités sont **mal réparties**.
 
-</v-clicks>
+</v-click>
 
 <!--
 La Loi de Déméter : "ne parlez qu'à vos amis immédiats". Une longue chaîne de messages crée une dépendance à toute la chaîne.

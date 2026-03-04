@@ -8,7 +8,7 @@ layout: two-cols-header
 
 ### Boîte blanche *(White Box)*
 
-<v-clicks>
+<v-clicks depth="2">
 
 On **connaît** le fonctionnement interne du système testé.
 
@@ -20,7 +20,7 @@ On utilise le **code source** comme base pour concevoir les tests.
 
 ::right::
 
-<v-clicks>
+<v-clicks depth="2">
 
 ### Boîte noire *(Black Box)*
 
@@ -52,11 +52,15 @@ Nota Bene du slide original : considérer les tests de non-régression comme des
 
 </v-click>
 
-<v-clicks>
+<v-click>
 
 <br>
 
 Même en écrivant des tests unitaires (boîte blanche), on peut **adopter une posture boîte noire** :
+
+</v-click>
+
+<v-clicks depth="2">
 
 - Tester **ce que fait** la fonction, pas **comment** elle le fait
 - Résister à la tentation de tester les détails d'implémentation

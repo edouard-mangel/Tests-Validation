@@ -49,13 +49,21 @@ zoom: 0.9
 
 ::right::
 
-<v-clicks>
+<v-click>
 
 Dans Visual Studio :
+
+</v-click>
+
+<v-clicks depth="2">
 
 1. **Nouveau projet** → *Class Library*
 2. Nommer le projet `Calculator`
 3. Ajouter la classe `Calculator.cs`
+
+</v-clicks>
+
+<v-click>
 
 ```csharp
 public static class Calculator
@@ -64,7 +72,7 @@ public static class Calculator
 }
 ```
 
-</v-clicks>
+</v-click>
 
 <!--
 Montrer les étapes dans l'IDE. Les étudiants suivent sur leur propre machine.
@@ -85,9 +93,13 @@ zoom: 0.9
 
 ::right::
 
-<v-clicks>
+<v-click>
 
 Dans la même solution :
+
+</v-click>
+
+<v-clicks depth="2">
 
 1. **Ajouter un projet** → *xUnit Test Project*
 2. Nommer `Calculator.Tests`
@@ -114,7 +126,7 @@ zoom: 0.9
 
 ::right::
 
-<v-clicks>
+<v-clicks depth="2">
 
 xUnit génère une classe avec l'attribut `[Fact]` :
 

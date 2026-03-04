@@ -11,7 +11,7 @@ zoom: 0.9
 
 ::right::
 
-<v-clicks>
+<v-clicks depth="2">
 
 Avec `[Fact]`, on doit écrire **un test par jeu de données** :
 
@@ -46,7 +46,7 @@ zoom: 0.9
 
 ::right::
 
-<v-clicks>
+<v-clicks depth="2">
 
 `[Theory]` remplace `[Fact]` pour les tests paramétriques :
 
@@ -135,13 +135,21 @@ public class HealthDamageTestData
 
 ::right::
 
-<v-clicks>
+<v-click>
 
 **Avantages vs `[InlineData]` :**
+
+</v-click>
+
+<v-clicks depth="2">
 
 - Données **réutilisables** entre plusieurs méthodes de test
 - Logique de génération des données **encapsulée**
 - Peut charger les données depuis un **fichier ou une BDD**
+
+</v-clicks>
+
+<v-click>
 
 <br>
 
@@ -157,7 +165,7 @@ public void Damage_NeverGoesNegative(
 }
 ```
 
-</v-clicks>
+</v-click>
 
 <!--
 ClassData est la solution quand les données sont complexes, générées dynamiquement, ou partagées entre tests.

@@ -2,18 +2,26 @@
 
 <br>
 
-<v-clicks>
+<v-click>
 
 **7 séances de 4h**, avec chaque séance :
 
+</v-click>
+
+<v-clicks depth="2">
+
 - Présentation théorique des concepts
 - Application pratique sous forme de TP
+
+</v-clicks>
+
+<v-click>
 
 <br>
 
 **1 séance de 4h** — Évaluation finale
 
-</v-clicks>
+</v-click>
 
 <!--
 Présenter le rythme général. Chaque séance alterne théorie et pratique.
@@ -25,18 +33,30 @@ Présenter le rythme général. Chaque séance alterne théorie et pratique.
 
 <br>
 
-<v-clicks>
+<v-click>
 
 ### TP notés
+
+</v-click>
+
+<v-clicks depth="2">
 
 - 5 TP à rendre au fil des séances
 - Certains seront évalués **aléatoirement**
 - Possibilité de demander à ce qu'un TP soit évalué
 - Possibilité de **contrôles surprise**
 
+</v-clicks>
+
+<v-click>
+
 <br>
 
 ### Évaluation finale
+
+</v-click>
+
+<v-clicks depth="2">
 
 Projet en groupes : 2 séances de code reviews
 
@@ -53,7 +73,7 @@ Le caractère aléatoire des TP notés incite à faire sérieusement tous les TP
 
 # Plan de la séance
 
-<v-clicks>
+<v-clicks depth="2">
 
 1. **Organisation du module** — 7 séances + évaluation
 2. **La qualité logicielle** — Définitions et axes

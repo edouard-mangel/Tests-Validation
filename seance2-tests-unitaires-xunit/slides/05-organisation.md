@@ -11,7 +11,7 @@ zoom: 0.9
 
 ::right::
 
-<v-clicks>
+<v-clicks depth="2">
 
 `[Trait]` permet de **classifier** les tests par catégorie :
 
@@ -81,7 +81,7 @@ zoom: 0.9
 
 ::right::
 
-<v-clicks>
+<v-clicks depth="2">
 
 Plutôt que de décorer chaque test, on peut appliquer le Trait **au niveau de la classe** :
 
@@ -120,7 +120,7 @@ zoom: 0.9
 
 ::right::
 
-<v-clicks>
+<v-clicks depth="2">
 
 Pour ignorer un test sans le supprimer :
 

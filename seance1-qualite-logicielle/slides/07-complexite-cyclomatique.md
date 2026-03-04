@@ -55,9 +55,13 @@ $$M = E - N + 2P$$
 
 </v-click>
 
-<v-clicks>
+<v-click>
 
 Où :
+
+</v-click>
+
+<v-clicks depth="2">
 
 - **M** = complexité cyclomatique
 - **E** = nombre d'**arêtes** du graphe (transitions entre blocs)
@@ -77,10 +81,14 @@ Un `if` ajoute un chemin. Un `switch` avec 5 cas ajoute 5 chemins. Une boucle aj
 
 <br>
 
-<v-clicks>
+<v-clicks depth="2">
 
 - Plus on a de **chemins algorithmiques**, plus la complexité augmente
 - Pour garantir un code de qualité, il faut **diminuer les tests conditionnels**
+
+</v-clicks>
+
+<v-click>
 
 <br>
 
@@ -95,7 +103,7 @@ Un `if` ajoute un chemin. Un `switch` avec 5 cas ajoute 5 chemins. Une boucle aj
 
 > Chaque `if`, `else`, `for`, `while`, `catch` ajoute +1 à la complexité.
 
-</v-clicks>
+</v-click>
 
 <!--
 Règle pratique : une méthode avec une complexité > 10 devrait être découpée.

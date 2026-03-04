@@ -10,7 +10,7 @@
 
 </v-click>
 
-<v-clicks>
+<v-clicks depth="2">
 
 <br>
 
@@ -58,7 +58,7 @@ Assert.Equal(3.14, result, precision: 2);
 
 ::right::
 
-<v-clicks>
+<v-clicks depth="2">
 
 ### Exemples
 
@@ -110,7 +110,7 @@ Assert.Matches(@"^\d{5}$", zipCode);
 
 ::right::
 
-<v-clicks>
+<v-clicks depth="2">
 
 <img src="/images/setup-projet-tests-1.png" class="hidden" />
 
@@ -166,7 +166,7 @@ Assert.Null(obj);
 
 ::right::
 
-<v-clicks>
+<v-clicks depth="2">
 
 ```csharp
 var users = new List<string> { "Alice", "Bob" };
@@ -205,7 +205,7 @@ C'est une **bonne pratique** de tester qu'un code lève bien (ou ne lève pas) u
 
 </v-click>
 
-<v-clicks>
+<v-clicks depth="2">
 
 ```csharp
 // Vérifier qu'une exception est levée
@@ -230,7 +230,7 @@ Assert.Null(exception);
 
 ::right::
 
-<v-clicks>
+<v-clicks depth="2">
 
 **Pourquoi tester les exceptions ?**
 

@@ -2,7 +2,7 @@
 
 <br>
 
-<v-clicks>
+<v-clicks depth="2">
 
 Tout test unitaire suit la même structure en **3 phases** :
 
@@ -32,7 +32,7 @@ zoom: 0.9
 
 ::right::
 
-<v-clicks>
+<v-clicks depth="2">
 
 ```csharp
 public class CalculatorTests
@@ -73,7 +73,7 @@ zoom: 0.9
 
 ::right::
 
-<v-clicks>
+<v-clicks depth="2">
 
 - **Test Explorer** → *Exécuter tout* (Ctrl+R, A)
 - Un test vert ✅ = le comportement est correct
@@ -103,7 +103,7 @@ Assert.True(x == y) est moins expressif que Assert.Equal(y, x) car le message d'
 
 <br>
 
-<v-clicks>
+<v-clicks depth="2">
 
 La règle stricte : **un seul `Assert` par test**.
 

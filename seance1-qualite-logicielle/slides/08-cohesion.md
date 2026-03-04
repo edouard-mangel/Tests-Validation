@@ -18,11 +18,15 @@ layout: section
 
 </v-click>
 
-<v-clicks>
+<v-click>
 
 <br>
 
 En pratique : **est-ce que tout ce qui est dans ce module a une raison d'y être ?**
+
+</v-click>
+
+<v-clicks depth="2">
 
 - Haute cohésion → module **focalisé**, responsabilité unique
 - Faible cohésion → module **fourre-tout**, difficile à maintenir
@@ -43,9 +47,13 @@ zoom: 0.9
 
 ::left::
 
-<v-clicks>
+<v-click>
 
 **Niveaux faibles (à éviter)**
+
+</v-click>
+
+<v-clicks depth="2">
 
 1. **Accidentelle** — aucun lien entre les méthodes
 2. **Logique** — reliées par un critère vague commun
@@ -56,9 +64,13 @@ zoom: 0.9
 
 ::right::
 
-<v-clicks>
+<v-click>
 
 **Niveaux élevés (à viser)**
+
+</v-click>
+
+<v-clicks depth="2">
 
 5. **Communicationnelle** — manipulent les mêmes données
 6. **Séquentielle** — mêmes données + ordre spécifique
@@ -85,11 +97,15 @@ Du niveau le plus faible (accidentel) au plus élevé (fonctionnel).
 
 </v-click>
 
-<v-clicks>
+<v-click>
 
 <br>
 
 **Exemples concrets :**
+
+</v-click>
+
+<v-clicks depth="2">
 
 - `Utils.cs` avec 50 méthodes disparates → **accidentelle** ❌
 - `UserService.cs` qui gère utilisateurs ET envoi d'emails → **logique** ⚠️
@@ -108,10 +124,14 @@ La règle : si vous ne pouvez pas nommer un module sans utiliser "Et" ou "Manage
 
 <br>
 
-<v-clicks>
+<v-clicks depth="2">
 
 - Le niveau **accidentel** est le plus faible, le niveau **fonctionnel** le plus élevé
 - Une bonne architecture logicielle nécessite la **plus forte cohésion possible**
+
+</v-clicks>
+
+<v-click>
 
 <br>
 
@@ -123,7 +143,7 @@ La règle : si vous ne pouvez pas nommer un module sans utiliser "Et" ou "Manage
 
 > Couplage faible + haute cohésion = code maintenable, testable, évolutif.
 
-</v-clicks>
+</v-click>
 
 <!--
 SRP est le "S" de SOLID. On le retrouvera dans les séances suivantes.

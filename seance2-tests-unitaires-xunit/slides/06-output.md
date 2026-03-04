@@ -8,7 +8,7 @@ Les tests ne sont pas des applications console. **`Console.WriteLine`** n'affich
 
 </v-click>
 
-<v-clicks>
+<v-clicks depth="2">
 
 <br>
 
@@ -45,7 +45,7 @@ zoom: 0.85
 
 ::right::
 
-<v-clicks>
+<v-clicks depth="2">
 
 ```csharp
 public class CalculatorTests
@@ -89,7 +89,7 @@ zoom: 0.9
 
 ::right::
 
-<v-clicks>
+<v-clicks depth="2">
 
 Le texte s'affiche dans la sortie du test dans Visual Studio.
 

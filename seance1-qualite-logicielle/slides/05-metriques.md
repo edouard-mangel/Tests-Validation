@@ -2,9 +2,13 @@
 
 <br>
 
-<v-clicks>
+<v-click>
 
 Il y a **3 principales catégories** de métriques dans la qualité logicielle :
+
+</v-click>
+
+<v-clicks depth="2">
 
 - **Maintenance applicative** — suivi des corrections, incidents, temps de résolution
 - **Qualité applicative** — mesure des caractéristiques du code
@@ -38,9 +42,13 @@ backgroundSize: contain
 
 <br>
 
-<v-clicks>
+<v-click>
 
 Quelques métriques clés liées à la maintenabilité :
+
+</v-click>
+
+<v-clicks depth="2">
 
 - **Nombre de lignes de code**
 - **Couplage** entre modules

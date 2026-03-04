@@ -6,7 +6,7 @@ layout: two-cols-header
 
 ::left::
 
-<v-clicks>
+<v-clicks depth="2">
 
 ### Larousse
 
@@ -16,7 +16,7 @@ layout: two-cols-header
 
 ::right::
 
-<v-clicks>
+<v-clicks depth="2">
 
 ### AFNOR
 
@@ -34,7 +34,7 @@ Poser les deux définitions générales. Faire noter aux étudiants la notion de
 
 <br>
 
-<v-clicks>
+<v-clicks depth="2">
 
 Dans le domaine de l'ingénierie logicielle, il n'y a pas de **définition unique**.
 
@@ -42,7 +42,7 @@ Selon le point de vue, les attentes sont différentes :
 
 </v-clicks>
 
-<v-clicks>
+<v-clicks depth="2">
 
 - L'utilisateur veut un logiciel **sans bugs** et **rapide**
 - Le développeur veut un code **maintenable** et **lisible**
@@ -51,7 +51,7 @@ Selon le point de vue, les attentes sont différentes :
 
 </v-clicks>
 
-<v-clicks>
+<v-clicks depth="2">
 
 On peut toutefois distinguer différents **paramètres et axes** de la qualité logicielle.
 
@@ -67,7 +67,7 @@ Souligner que la qualité est multidimensionnelle. Ce qui est "de qualité" pour
 
 <br>
 
-<v-clicks>
+<v-clicks depth="2">
 
 - **L'adéquation** entre le besoin et la façon dont le logiciel y répond
 - **L'absence de dysfonctionnement** — le logiciel fait ce qu'il est censé faire
@@ -132,9 +132,7 @@ Un défaut n'est pas forcément un bug : un code trop complexe est un défaut m�
 
 </v-click>
 
-<v-clicks>
-
-<br>
+<v-clicks depth="2">
 
 - Un code mal maîtrisé → **dette technique** croissante
 - La surveillance des métriques → **diminution des coûts** de maintenance à moyen et long terme
