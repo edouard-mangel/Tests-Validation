@@ -197,24 +197,3 @@ MemberData permet de partager des données entre méthodes dans la même classe 
 La règle : ne pas sur-ingénier. Un [Fact] simple est souvent suffisant.
 [Theory] apporte de la valeur quand on teste des cas limites (0, négatifs, nulls, max values...).
 -->
-
----
-layout: center
-class: text-center
----
-
-# TP — Les bases des tests unitaires
-
-<br>
-
-**Exercice 1** — Corriger une `StringCalculator` bugée (tests + fix)
-
-**Exercice 2** — Tester un `PasswordValidator` (règles métier, exceptions, `[Theory]`)
-
-<br>
-
-[📄 Télécharger le sujet du TP](/tp2.pdf)
-
-<!--
-TP2 — Les bases des tests unitaires.
--->

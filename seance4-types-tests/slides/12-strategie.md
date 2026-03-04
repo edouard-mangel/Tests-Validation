@@ -112,37 +112,3 @@ C'est le développeur qui comprend le contexte, les risques, et les compromis.
 Les trois niveaux sont **complémentaires**. Aucun ne remplace les autres.
 
 </v-click>
-
----
-layout: center
-class: text-center
----
-
-# TP — Tests d'intégration
-
-<br>
-
-**Exercice 1** — Tests d'intégration pour un repository (InMemoryDatabase / SQLite)
-
-**Exercice 2** — Tests d'API avec `WebApplicationFactory`
-
-**Exercice 3** — Property-Based Testing avec FsCheck
-
-**Exercice 4** — Contract Testing avec Pact
-
-<br>
-
-*Qu'est-ce que le test d'intégration a attrapé que le test unitaire n'aurait pas vu ?*
-
-<br>
-
-[📄 Télécharger le sujet du TP](/tp4.pdf)
-
-<!--
-Le TP utilise une petite Web API ASP.NET fournie (TodoApi).
-1. Tests de repository avec InMemory puis SQLite — comparer les comportements
-2. Tests d'API avec WebApplicationFactory — découvrir un bug de sérialisation
-3. Property-Based Testing avec FsCheck — propriétés roundtrip et invariant
-4. Contract Testing avec Pact — écrire un test consommateur (guidé car concept nouveau)
-Question de réflexion à la fin : tableau bug → niveau de test qui l'a détecté.
--->

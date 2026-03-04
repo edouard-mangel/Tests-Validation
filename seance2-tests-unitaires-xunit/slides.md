@@ -121,16 +121,5 @@ src: ./slides/07-parametric.md
 ---
 
 ---
-layout: center
-class: text-center
+src: ./slides/08-tp.md
 ---
-
-# À vous de jouer !
-
-<br>
-
-**TP2 — Tests unitaires : crédit immobilier**
-
-<br>
-
-*Écrire des tests unitaires pour un calculateur de crédit immobilier*
