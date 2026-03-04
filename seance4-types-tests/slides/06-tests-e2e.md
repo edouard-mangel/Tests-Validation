@@ -50,10 +50,12 @@ On les réserve aux parcours critiques (login, paiement, inscription...).
 -->
 
 ---
+layout: two-cols-header
+---
 
 # Exemple de test e2e
 
-<br>
+::left::
 
 Un test Playwright qui vérifie le parcours de connexion :
 
@@ -74,6 +76,8 @@ public async Task User_CanLogin_WithValidCredentials()
     await Expect(page.Locator("h1")).ToHaveTextAsync("Bienvenue");
 }
 ```
+
+::right::
 
 <v-click>
 

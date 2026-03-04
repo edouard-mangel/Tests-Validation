@@ -46,10 +46,6 @@ zoom: 0.9
 
 <v-clicks>
 
-- Un test par méthode publique
-- Revient à tester l'**implémentation**
-- Force le couplage du test au code
-
 </v-clicks>
 
 <br>
@@ -80,6 +76,10 @@ public class UserValidatorTests
 
 <v-clicks>
 
+- Un test par méthode publique (minimum)
+- Revient à tester l'**implémentation**
+- Force le couplage du test au code
+
 - Si vous refactorez → **tous les tests cassent**
 - Couverture de code non représentative
 - Tests **rigides et fragiles**
@@ -96,7 +96,7 @@ On teste le "comment" au lieu du "quoi".
 
 ---
 layout: two-cols-header
-zoom: 0.9
+zoom: 0.8
 ---
 
 # 2ème école : tester par scénario métier
@@ -319,20 +319,27 @@ C'est la **pyramide des tests**.
 <!--
 Slide de synthèse avant le TP.
 Rappeler la pyramide : la base large = les tests unitaires.
-On va maintenant passer à la pratique avec le TP.
 -->
-
 ---
-layout: center
+layout: two-cols-header
+class: text-center
 ---
 
-# TP — À vous de jouer ! 🧪
+# La pyramide des tests, ou l'outside in diamond
 
-<br>
 
-Rendez-vous sur le sujet du **TP2 — Les bases des tests unitaires**
+::left::
+
+## La Pyramide des tests, de Mike Cohn
+
+<img src="/images/pyramide-agile.png" class="h-60 mx-auto" />
+
+::right::
+
+## L'Outside-In Diamond, de Thomas Pierrain
+
+<img src="/images/diamond.png" class="h-80 mx-auto" />
 
 <!--
-Transition vers le TP.
-Distribuer le sujet du TP2. Les étudiants commencent par l'exercice 1 (StringCalculator bugué).
+Rappel visuel : beaucoup de tests unitaires à la base, quelques tests d'intégration, peu de tests e2e.
 -->
