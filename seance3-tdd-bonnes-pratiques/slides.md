@@ -36,17 +36,14 @@ Durée prévue : 1h30 de cours + 2h de TP
 
 <v-clicks>
 
-1. **Quand écrire les tests ?** — Les trois approches
-2. **Test-Driven Development** — Le cycle Rouge/Vert/Refactor
+1. **Correction du TP2** — Feedbacks sur les tests écrits
+2. **Quand écrire les tests ?** — Les trois approches
 3. **Les principes FIRST** — Ce que doit être un bon test
 4. **Bonnes pratiques** — Cas limites, testing positif/négatif
 5. **Le problème des dépendances** — Tester du code couplé
-6. **Injection de dépendances** — La clé de la testabilité
-7. **Les doublures de test** — Dummy, Stub, Fake, Mock, Spy
-8. **NSubstitute** — Mocking framework pour .NET
-9. **Test Fixtures** — Partager le setup entre tests
-10. **Approval Testing** — Vérifier par comparaison
-11. **TP** — Doublures, fixtures et Test Data Builders
+6. **Les doublures de test** — Dummy, Stub, Fake, Mock, Spy
+7. **Approval Testing** — Vérifier par comparaison
+8. **TP** — Doublures, fixtures et Test Data Builders 
 
 </v-clicks>
 
